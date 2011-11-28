@@ -1,0 +1,16 @@
+I found this problem really tricky. It took me hundreds of kilometers on the highway to finally break it :-)
+Also, a good dose of TDD helped a lot on this one as well. 
+
+I think the code has turned out somewhat readable, and I have added a few comments to the top of most files. 
+
+A few general notes: 
+ - Any player's turn may have associated actions, not just Lil's
+ - In fact, I don't distinguish between the players at all in the simulation
+
+These choices make my code more generic, but they may also stand in
+the way of some clever shortcuts. Because obviously I'm not using all
+information given in the puzzle text.
+
+Instead I'm simply running the simulation, recursively checking which
+"turn resolutions" (turn + signal) prove valid all the way to the end
+of the game.
