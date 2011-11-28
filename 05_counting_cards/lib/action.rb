@@ -20,14 +20,12 @@ class Action
   end
 
   def ==(other)
-    # XXX
-    player == other.player && action_type == other.action_type && card == other.card
+    %w{ player action_type card }.all? { |attr| self.send(attr) == other.send(attr) }
   end
 
   def to_s
     "#{action_type}#{card}" + (player.nil? ? "" : ":#{player}")
   end
-
   
   private
   def unknown_card

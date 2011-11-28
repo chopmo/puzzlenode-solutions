@@ -37,8 +37,7 @@ class Turn
   end
 
   def ==(other)
-    # XXX
-    actions == other.actions && signals == other.signals && player == other.player
+    %w{ actions signals player }.all? { |attr| self.send(attr) == other.send(attr) }
   end
 
   def to_s

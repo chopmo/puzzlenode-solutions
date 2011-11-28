@@ -1,5 +1,4 @@
 $:.unshift('lib')
-
 require 'parsers/turn_parser'
 require 'puzzle'
 
