@@ -1,3 +1,5 @@
+# This is a convenience class to parse the text format specified in
+# the puzzle description. It emits an array of Turn instances.
 require 'parsers/action_parser'
 require 'turn'
 

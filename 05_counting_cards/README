@@ -14,3 +14,4 @@ information given in the puzzle text.
 Instead I'm simply running the simulation, recursively checking which
 "turn resolutions" (turn + signal) prove valid all the way to the end
 of the game.
+

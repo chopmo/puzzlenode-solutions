@@ -1,3 +1,9 @@
+# This class is simply a driver to generate the required output format.
+#
+# It makes two passes:
+#  1) Solve the puzzle, recording a list of applied turns (see Simulation)
+#  2) Apply each of these turns, collecting the hands of a specific player
+
 require 'simulation'
 require 'table'
 
