@@ -1,10 +1,12 @@
 # This class and Simulation is there the interesting (and messy) stuff happens.
+#
+# The important methods to understand are #apply! and #card_exists?. The rest is just housekeeping. 
 # 
 require 'delegate'
 
 class Table
-  attr_accessor :discards
-  attr_accessor :transit
+  attr_reader :discards
+  attr_reader :transit
 
   def initialize
     @discards = []
@@ -20,15 +22,12 @@ class Table
     turn.actions.each do |action|
       next if action.unresolved?
       if action.action_type == "+"
-        if action.player
-          @transit -= [action.card]
-        end
-
+        @transit -= [action.card]
         return nil if card_exists?(action.card)
         hands[turn.player] << action.card
       else
         hands[turn.player].delete(action.card)
-        target = (action.player == "discard") ? discards : transit
+        target = (action.player == "discard") ? @discards : @transit
         target << action.card
       end
     end
