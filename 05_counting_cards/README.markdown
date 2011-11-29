@@ -9,10 +9,11 @@ Each turn consists of a number of *actions* (eg. "+5C:Shady") and a possibly emp
 A *table* is responsible for keeping track of the players' *hands*, the cards in *transit* (ie. being passed between players) and the *discards*. The table can *apply* a resolved turn to itself, returning an updated table or nil if the turn was invalid. 
 
 There are a few supporting classes
- * *Simulation* contains the actual recursive algorithm described below
- * *Puzzle* generates the required output format
- * *ActionParser* and *TurnParser* translates the input format to instances of the model classes
- * The file *solver.rb* is the entry point and is responsible for file I/O
+
+* *Simulation* contains the actual recursive algorithm described below
+* *Puzzle* generates the required output format
+* *ActionParser* and *TurnParser* translates the input format to instances of the model classes
+* The file *solver.rb* is the entry point and is responsible for file I/O
 
 The way the puzzle is actually solved has two main parts. 
 
@@ -27,6 +28,7 @@ Most turns have no signals so they only have one resolution.
 In order to determine whether a turn resolution is "valid", we simply try to apply it to the table. 
 
 When applying a turn, the table
+
  * Checks that a card is not introduced into the game twice (I expected there to be more checks, but this actually seems to cover it)
  * Moves cards around between hands, transit and discards according to the actions
  * Ignores unresolved actions (eg. "+??:Lil")
@@ -41,6 +43,7 @@ Also, a good dose of TDD helped a lot on this one as well.
 I think the code has turned out somewhat readable, and I have added a few comments to the top of most files. 
 
 A few general notes: 
+
  * I don't use the "round" concept for anything. A game consists of a number of turns. 
  * Any player's turn may have associated actions, not just Lil's
  * In fact, I don't distinguish between the players at all in the simulation
