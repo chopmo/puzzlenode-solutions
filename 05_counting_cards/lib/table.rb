@@ -13,43 +13,31 @@ class Table
   end
 
   def apply(turn)
-    catch (:invalid_action) do
-      out = self.clone
-      turn.actions.each do |action|
-        next if action.unresolved?
-        if action.action_type == "+"
-          if action.player
-            out.remove_from_transit(action.card)
-          end
-
-          out.check_not_on_table(action.card)
-          out.hands[turn.player] << action.card
-        else
-          out.hands[turn.player].delete(action.card)
-          target = (action.player == "discard") ? out.discards : out.transit
-          target << action.card
-        end
-      end
-      return out
-    end
-    nil
+    self.clone.apply!(turn)
   end
 
+  def apply!(turn)
+    turn.actions.each do |action|
+      next if action.unresolved?
+      if action.action_type == "+"
+        if action.player
+          @transit -= [action.card]
+        end
+
+        return nil if card_exists?(action.card)
+        hands[turn.player] << action.card
+      else
+        hands[turn.player].delete(action.card)
+        target = (action.player == "discard") ? discards : transit
+        target << action.card
+      end
+    end
+    self
+  end
+  
   def card_exists?(card)
     (@hands.values + @discards + @transit).flatten.include?(card)
   end
-
-  def remove_from_transit(card)
-    @transit -= [card]
-  end
-
-  def check_not_on_table(card)
-    if card_exists?(card)
-      # puts "ERROR: Card #{card} already exists"
-      throw :invalid_action
-    end
-  end
-
 
   def to_s
     "Hands: \n" +
