@@ -17,13 +17,13 @@ class Puzzle
     Simulation.apply_turn(Table.new, @turns, 0, applied_turns)
 
     table = Table.new
-    out = ""
-    applied_turns.each do |turn|
-      table = table.apply(turn)
-      if turn.player == player
-        out += table.hands[player].join(" ") + "\n"
-      end
+    applied_turns.inject("") do |out, turn|
+      table.apply!(turn)
+      turn.player == player ? out + format_hand(table.hands[player]) : out
     end
-    out
+  end
+
+  def format_hand(hand)
+    hand.join(" ") + "\n"    
   end
 end
