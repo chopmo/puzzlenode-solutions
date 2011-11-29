@@ -10,14 +10,14 @@ A *table* is responsible for keeping track of the players' *hands*, the cards in
 
 The way the puzzle is actually solved is like this: 
 
-1. Find the valid signal combination
-------------------------------------
+ 1. Find the valid signal combination
+-------------------------------------
 This is done by applying all turn resolutions recursively to the table, looking for a valid path of signals all the way through the game. For each turn, we try all resolutions one by one, each of which attempts will try all resolutions of the next turn etc. Most turns have no signals so they only have one resolution. 
 
 This happens in Simulation#apply_turn
 
-2. Detecting valid turn applications
-------------------------------------
+ 2. Detecting valid turn applications
+-------------------------------------
 In order to find a "valid" path through the signals, we simply keep going until some turn resolution doesn't make sense. When that happens, the recursion descibed above will bactrack and try a different path. 
 
 When applying a turn, the table
