@@ -2,32 +2,40 @@ Solution overview
 =================
 The following is a brief description of how the code works, with important concepts emphasized. 
 
-A game consists of a number of *turns*. Each of Lil's turns has *signals* associated with it. A turn may be *unresolved*, meaning that is has signals associated with it. Any turn may be asked for its *resolutions*. For a turn with no associated signals, this is simply [self], for a turn with 3 signals, there will be 3 resolutions. 
+A game consists of a number of *turns*. Each of Lil's turns has *signals* associated with it. A turn may be *unresolved*, meaning that is has signals associated with it. Any turn may be asked for its list of *resolutions*. For a turn with no associated signals, this is simply [self]. For a turn with 3 signals, there will be 3 resolutions. 
 
-Each turn consists of a number of *actions*, for example "+5C:Shady". A signal is simply an array of actions. 
+Each turn consists of a number of *actions* (eg. "+5C:Shady") and a possibly empty list of signals. A signal is itself an array of actions. 
 
 A *table* is responsible for keeping track of the players' *hands*, the cards in *transit* (ie. being passed between players) and the *discards*. The table can *apply* a resolved turn to itself, returning an updated table or nil if the turn was invalid. 
 
-The way the puzzle is actually solved is like this: 
+There are a few supporting classes
+- *Simulation* contains the actual recursive algorithm described below
+- *Puzzle* generates the required output format
+- *ActionParser* and *TurnParser* translates the input format to instances of the model classes
+- The file *solver.rb* is the entry point and is responsible for file I/O
 
-1 Find the valid signal combination
------------------------------------
-This is done by applying all turn resolutions recursively to the table, looking for a valid path of signals all the way through the game. For each turn, we try all resolutions one by one, each of which attempts will try all resolutions of the next turn etc. Most turns have no signals so they only have one resolution. 
+The way the puzzle is actually solved has two main parts. 
 
-This happens in Simulation#apply_turn
+1 Find a valid combination of signals
+-------------------------------------
+This is done by trying to apply all turn resolutions recursively to the table, looking for a valid path of resolutions all the way through the game. For each turn, the resolutions are tried one by one, each of which attempts will recursively try all resolutions of the next turn. This happens in Simulation#apply_turn. 
+
+Most turns have no signals so they only have one resolution. 
 
 2 Detecting valid turn applications
 -----------------------------------
-In order to find a "valid" path through the signals, we simply keep going until some turn resolution doesn't make sense. When that happens, the recursion descibed above will bactrack and try a different path. 
+In order to determine whether a turn resolution is "valid", we simply try to apply it to the table. 
 
 When applying a turn, the table
+- Checks that a card is not introduced into the game twice (I expected there to be more checks, but this actually seems to cover it)
 - Moves cards around between hands, transit and discards according to the actions
 - Ignores unresolved actions (eg. "+??:Lil")
-- Checks that a card is not introduced into the game twice (I expected there to be more checks, but this actually seems to cover it)
+
+Table#apply! is where this is done. 
 
 Notes
 =====
-I found this problem really tricky. It took me hundreds of kilometers on the motorway to finally break it :-)
+I found this puzzle really tricky. It took me hundreds of kilometers on the motorway to finally break it :-)
 Also, a good dose of TDD helped a lot on this one as well. 
 
 I think the code has turned out somewhat readable, and I have added a few comments to the top of most files. 
