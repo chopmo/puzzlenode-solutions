@@ -1,5 +1,5 @@
 # A turn consists of a number of actions, for example "+5C or
-# -10H:Shady". A turn may have 0 or more signals associated with it (this is a generalization, in the 
+# -10H:Shady". A turn may have 0 or more signals associated with it.
 class Turn
   attr_reader :actions
   attr_reader :signals

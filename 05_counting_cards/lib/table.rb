@@ -1,4 +1,4 @@
-# This class and Simulation is there the interesting (and messy) stuff happens.
+# This class and Simulation is there the interesting (and messy) stuff happens. See the README for information about how this works. 
 #
 # The important methods to understand are #apply! and #card_exists?. The rest is just housekeeping. 
 # 

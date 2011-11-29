@@ -44,7 +44,7 @@ I think the code has turned out somewhat readable, and I have added a few commen
 
 A few general notes: 
 
- * I don't use the "round" concept for anything. A game consists of a number of turns. 
+ * I don't use the concept of a "round" for anything. A game simply consists of a number of turns. 
  * Any player's turn may have associated actions, not just Lil's
  * In fact, I don't distinguish between the players at all in the simulation
  * The table distinguishes between the discard pile and cards in transit. This is not strictly necessary, but I think it improves readability. 
@@ -53,7 +53,5 @@ These choices make my code more generic, but they may also stand in
 the way of some clever shortcuts. Because obviously I'm not using all
 information given in the puzzle text.
 
-Instead I'm simply running the simulation, recursively checking which
-"turn resolutions" (turn + signal) prove valid all the way to the end
-of the game.
+
 
