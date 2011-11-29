@@ -1,3 +1,5 @@
+# This class and Simulation is there the interesting (and messy) stuff happens.
+# 
 require 'delegate'
 
 class Table
