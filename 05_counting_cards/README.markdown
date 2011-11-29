@@ -51,7 +51,7 @@ A few general notes:
 
 These choices make my code more generic, but they may also stand in
 the way of some clever shortcuts. Because obviously I'm not using all
-information given in the puzzle text.
+information given in the problem description. 
 
 
 
