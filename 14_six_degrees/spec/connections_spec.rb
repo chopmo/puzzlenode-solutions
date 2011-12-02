@@ -10,7 +10,6 @@ describe Connections do
 
   it "finds first order connections" do
     Connections.new(repo, "alberta").on_level(1).sort.should == %w( bob christie )
-    Connections.new(repo, "bob").on_level(1).sort.should == %w( alberta christie duncan )
   end
 
   it "can find all connections to a certain depth" do
@@ -18,7 +17,14 @@ describe Connections do
   end
   
   it "finds second order connections" do
-    # Connections.new(repo, "alberta").on_level(2).sort.should == %w( duncan emily )
-    # Connections.new(repo, "bob").on_level(2).sort.should == %w( emily farid )
+    Connections.new(repo, "alberta").on_level(2).sort.should == %w( duncan emily )
+  end
+
+  it "finds third order connections" do
+    Connections.new(repo, "alberta").on_level(3).sort.should == %w( farid )
+  end
+
+  it "finds fourth order connections" do
+    Connections.new(repo, "alberta").on_level(4).sort.should == %w( )
   end
 end
