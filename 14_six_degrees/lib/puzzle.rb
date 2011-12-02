@@ -4,7 +4,7 @@ require 'connections'
 
 class Puzzle
   def initialize(text)
-    @repo = UserRepository.new(InputParser.new(text).parse.values)
+    @repo = InputParser.new(text).parse
   end
 
   def solve

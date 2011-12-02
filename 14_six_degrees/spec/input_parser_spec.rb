@@ -17,17 +17,17 @@ duncan: hey @farid, can you pick up some of those cookies on your way home?
 farid: @duncan, might have to work late tonight, but I'll try and get away if I can
 END
 
-  let (:users) { InputParser.new(TEXT).parse }
+  let (:repo) { InputParser.new(TEXT).parse }
 
-  it "parses a text of tweets into a list of users" do
-    users.size.should == 6
+  it "parses a text of tweets into a user repository" do
+    repo.users.size.should == 6
   end
 
   it "adds names to users" do
-    users["emily"].should_not be_nil
+    repo.find_user("emily").should_not be_nil
   end
 
   it "records mentions for users" do
-    users["emily"].mentions.sort.should == %w{ christie duncan }
+    repo.find_user("emily").mentions.sort.should == %w{ christie duncan }
   end
 end

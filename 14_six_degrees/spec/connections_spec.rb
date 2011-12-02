@@ -4,8 +4,7 @@ require 'connections'
 
 describe Connections do
   let (:repo) do
-    user_hash = InputParser.new(open(File.join(File.dirname(__FILE__), "../data/sample_input.txt")).read).parse
-    UserRepository.new(user_hash.values)
+    repo = InputParser.new(open(File.join(File.dirname(__FILE__), "../data/sample_input.txt")).read).parse
   end
 
   it "finds first order connections" do

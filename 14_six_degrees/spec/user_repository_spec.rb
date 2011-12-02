@@ -7,8 +7,8 @@ describe UserRepository do
 
   it "can be initialized with a list of users" do
     text = open(File.join(File.dirname(__FILE__), "..", "data", "sample_input.txt")).read
-    user_hash = InputParser.new(text).parse
-    UserRepository.new(user_hash.values).find_user("christie").should_not be_nil
+    repo = InputParser.new(text).parse
+    repo.find_user("christie").should_not be_nil
   end
 
   it "supports adding users" do

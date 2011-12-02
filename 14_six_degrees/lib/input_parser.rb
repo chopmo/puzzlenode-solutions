@@ -1,4 +1,5 @@
 require 'user'
+require 'user_repository'
 
 class InputParser
   def initialize(text)
@@ -13,7 +14,7 @@ class InputParser
       mentions = tweet.scan(/@(\w+)/).flatten
       mentions.each { |m| users[sender].add_mention(m) }
     end
-    users
+    UserRepository.new(users.values)
   end
 
 end
