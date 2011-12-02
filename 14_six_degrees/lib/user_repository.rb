@@ -1,6 +1,6 @@
 class UserRepository
-  def initialize
-    @users = []
+  def initialize(users = nil)
+    @users = Array(users)
   end
 
   def add_user(user)
