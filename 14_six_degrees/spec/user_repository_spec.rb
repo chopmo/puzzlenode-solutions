@@ -27,7 +27,9 @@ describe UserRepository do
 
   it "returns all users alphabetically" do
     repo.add_user(User.new(name: "joe"))
-    repo.users.size.should == 1
-    repo.users.first.name.should == "joe"
+    repo.add_user(User.new(name: "bob"))
+    repo.users.size.should == 2
+    repo.users[0].name.should == "bob"
+    repo.users[1].name.should == "joe"
   end
 end
