@@ -19,7 +19,7 @@ class Connections
     user = @repo.find_user(name)
     user.mentions.select do |other_name|
       other_user = @repo.find_user(other_name)
-      other_user.mentions?(name)
+      other_user && other_user.mentions?(name)
     end
   end
 
