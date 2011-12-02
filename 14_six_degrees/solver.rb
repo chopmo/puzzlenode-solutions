@@ -12,8 +12,9 @@ repo.users.each do |user|
   while true
     conns = Connections.new(repo, user.name).on_level(level)
     break if conns.empty?
-    puts conns.join(" ")
+    puts conns.sort.join(", ")
     level += 1
   end
-  puts 
+  puts # Note: Trailing newline had to be removed before submitting
 end
+
