@@ -5,15 +5,14 @@ class Connections
   end
 
   def on_level(level)
-    if level == 1
-      direct_connections(@username)
-    else
-      
-    end
+    all(level) - all(level - 1)
   end
 
   def all(depth)
-    direct_connections(@username)
+    return [] if depth < 1
+    this_level_conns = direct_connections(@username)
+    next_level_conns = this_level_conns.map { |name| Connections.new(@repo, name).all(depth - 1) }
+    Set.new(this_level_conns).merge(next_level_conns.flatten).to_a - [@username]
   end
 
   def direct_connections(name)
