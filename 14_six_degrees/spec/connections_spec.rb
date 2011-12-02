@@ -8,10 +8,13 @@ describe Connections do
     UserRepository.new(user_hash.values)
   end
 
-  let (:connections) { Connections.new(repo)  }
-  
   it "finds first order connections" do
-    connections.for("alberta", 1).sort.should == %w( bob christie )
-    connections.for("bob", 1).sort.should == %w( alberta christie duncan )
+    Connections.new(repo, "alberta").on_level(1).sort.should == %w( bob christie )
+    Connections.new(repo, "bob").on_level(1).sort.should == %w( alberta christie duncan )
+  end
+
+  it "finds second order connections" do
+    # connections.for("alberta", 2).sort.should == %w( duncan emily )
+    # connections.for("bob", 2).sort.should == %w( emily farid )
   end
 end
