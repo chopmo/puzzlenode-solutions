@@ -11,4 +11,7 @@ class UserRepository
     @users.find { |u| u.name == name }
   end
 
+  def users
+    @users.sort_by(&:name)
+  end
 end

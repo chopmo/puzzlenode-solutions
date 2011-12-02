@@ -25,4 +25,9 @@ describe UserRepository do
     repo.find_user("joe").should be_nil
   end
 
+  it "returns all users alphabetically" do
+    repo.add_user(User.new(name: "joe"))
+    repo.users.size.should == 1
+    repo.users.first.name.should == "joe"
+  end
 end
