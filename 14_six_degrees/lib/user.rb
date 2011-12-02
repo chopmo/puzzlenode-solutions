@@ -12,4 +12,9 @@ class User
   def add_mention(name)
     @mentions << name
   end
+
+  def mentions?(name)
+    mentions.include?(name)
+  end
+
 end

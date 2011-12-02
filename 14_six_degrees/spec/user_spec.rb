@@ -15,11 +15,18 @@ describe User do
     u.mentions.include?("joe").should be_true
   end
 
+  it "knows if it has mentioned a particular user" do
+    u = User.new
+    u.add_mention("joe")
+    u.mentions?("joe").should be_true
+    u.mentions?("alice").should be_false
+  end
+
   it "prevents duplicate mentions" do
     u = User.new
     u.add_mention("joe")
     u.add_mention("joe")
     u.mentions.size.should == 1
   end
-  
+
 end
