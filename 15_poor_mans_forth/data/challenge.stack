@@ -1,0 +1,39 @@
+PROCEDURE DIVISIBLE
+MOD 
+0
+=
+/PROCEDURE
+
+PROCEDURE FB
+  15
+  DIVISIBLE
+  IF
+    :fizzbuzz
+  ELSE
+    DUP
+    3
+    DIVISIBLE
+    IF
+      :fizz
+    ELSE
+      DUP
+      5
+      DIVISIBLE
+      IF
+        :buzz
+      ELSE
+        DUP
+      THEN
+    THEN
+  THEN
+/PROCEDURE
+
+100
+99
+TIMES
+  DUP
+  FB
+  SWAP
+  1
+  SUBTRACT
+/TIMES
