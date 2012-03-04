@@ -21,15 +21,15 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([5])
   end
 
-  # it "implements SUBTRACT command" do
-  #   execute %w[
-  #     1
-  #     2
-  #     SUBTRACT
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([-1])
-  # end
+  it "implements SUBTRACT command" do
+    execute %w[
+      1
+      2
+      SUBTRACT
+    ]
+    
+    interpreter.stack.must_equal([-1])
+  end
   # 
   # it "implements MULTIPLY" do
   #   execute %w[

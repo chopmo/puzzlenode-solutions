@@ -9,6 +9,7 @@ module Stacker
     def execute(cmd)
       case cmd
       when /ADD/ then add
+      when /SUBTRACT/ then subtract
       else 
         # Assume it's an integer
         push(cmd.to_i)
@@ -19,6 +20,12 @@ module Stacker
       push(pop + pop)
     end
 
+    def subtract
+      b = pop
+      a = pop
+
+      push(a - b)
+    end
     def push(e)
       stack.unshift(e)
     end
