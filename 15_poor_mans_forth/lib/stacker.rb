@@ -10,6 +10,7 @@ module Stacker
       case cmd
       when /ADD/ then add
       when /SUBTRACT/ then subtract
+      when /MULTIPLY/ then multiply
       else 
         # Assume it's an integer
         push(cmd.to_i)
@@ -26,6 +27,13 @@ module Stacker
 
       push(a - b)
     end
+
+    def multiply
+      push(pop * pop)
+    end
+
+    private 
+
     def push(e)
       stack.unshift(e)
     end

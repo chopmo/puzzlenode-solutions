@@ -30,16 +30,16 @@ describe "Stacker::Interpreter" do
     
     interpreter.stack.must_equal([-1])
   end
-  # 
-  # it "implements MULTIPLY" do
-  #   execute %w[
-  #     3
-  #     10
-  #     MULTIPLY
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([30])
-  # end
+  
+  it "implements MULTIPLY" do
+    execute %w[
+      3
+      10
+      MULTIPLY
+    ]
+    
+    interpreter.stack.must_equal([30])
+  end
 
   # it "implements DIVIDE" do
   #   execute %w[
