@@ -1,0 +1,1 @@
+require 'stacker/contexts/root'

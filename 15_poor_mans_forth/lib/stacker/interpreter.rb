@@ -6,19 +6,28 @@ module Stacker
 
     def initialize
       @stack = []
-      @interpreters = [Contexts::Root.new(self)]
+      @contexts = [Contexts::Root.new(self)]
     end
 
     def execute(cmd)
-      @interpreters.last.execute(cmd)
+      @contexts.last.execute(cmd)
     end
 
-    def push_processor(p)
-      @processors.push(p)
+    def push_context(ctx)
+      @contexts.push(ctx)
     end
 
-    def pop_processor
-      @processors.pop
+    def pop_context
+      @contexts.pop
+    end
+
+    def parent_context_of(child)
+      child_idx = @contexts.rindex(child)
+      parent_idx = child_idx - 1
+      if parent_idx < 0
+        raise "Unable to find parent context of #{child}"
+      end
+      @contexts[parent_idx]
     end
   end
 end
