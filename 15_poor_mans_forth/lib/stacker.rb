@@ -7,12 +7,12 @@ module Stacker
     end
 
     def execute(cmd)
-      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD).include?(cmd)
+      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD <).include?(cmd)
         send(cmd.downcase)
       else
         push(cmd.to_i)
       end
-      puts "After #{cmd}, stack is #{stack}"
+      # puts "After #{cmd}, stack is #{stack}"
     end
 
     def add
@@ -36,6 +36,11 @@ module Stacker
     def mod
       b, a = pop, pop
       push a % b
+    end
+
+    def <
+      b, a = pop, pop
+      push a < b ? :true : :false
     end
     private 
 
