@@ -1,10 +1,10 @@
 module StackOperations
   # XXX: use delegation
   def push(e)
-    @data.push(e)
+    @stack.push(e)
   end
 
   def pop
-    @data.pop
+    @stack.pop
   end
 end

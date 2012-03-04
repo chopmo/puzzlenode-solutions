@@ -1,34 +1,26 @@
-require 'stacker/arithmetic'
-require 'stacker/logic'
-require 'stacker/stack_operations'
+require 'stacker/root_interpreter'
 
 module Stacker
   class Interpreter
     include StackOperations
 
-    def initialize
-      @data = []
-      @arithmetic = Arithmetic.new(@data)
-      @logic = Logic.new(@data, self)
-    end
+    attr_reader :stack
 
-    def stack
-      @data
+    def initialize
+      @stack = []
+      @interpreters = [RootInterpreter.new(@stack)]
     end
 
     def execute(cmd)
-      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD).include?(cmd)
-        @arithmetic.execute(cmd)
-      elsif %(< > =).include?(cmd)
-        @logic.execute(cmd)
-      else
-        push_literal(cmd)
-      end
-      # puts "After #{cmd}, stack is #{stack}"
+      @interpreters.last.execute(cmd)
     end
 
-    def push_literal(cmd)
-      push(cmd.to_i)
+    def push_processor(p)
+      @processors.push(p)
+    end
+
+    def pop_processor
+      @processors.pop
     end
   end
 end

@@ -1,11 +1,12 @@
 require 'stacker/stack_operations'
+require 'stacker/if_statement'
 
 module Stacker
   class Logic
     include StackOperations
 
-    def initialize(data, interpreter)
-      @data = data
+    def initialize(stack, interpreter)
+      @stack = stack
       @interpreter = interpreter
     end
     
@@ -29,10 +30,11 @@ module Stacker
     end
 
     def if
-      test = pop
-      puts "Test is #{test}"
-      if test == :true
-      end
+      puts "creating if statement"
+      IfStatement.create(pop, @interpreter)
+      # test = pop
+      # puts "Test is #{test}"
+      # @interpreter.push_processor(IfStatement.new(test))
     end
   end
 end

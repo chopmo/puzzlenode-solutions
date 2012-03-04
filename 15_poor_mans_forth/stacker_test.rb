@@ -102,7 +102,7 @@ describe "Stacker::Interpreter" do
 
     interpreter.stack.must_equal([:true, :false])
   end
-  # 
+  
   # it "implements the IF command" do
   #   execute %w[
   #     :true
@@ -120,7 +120,7 @@ describe "Stacker::Interpreter" do
   #   
   #   interpreter.stack.must_equal([3, 10])
   # end
-  # 
+  
   # it "implements the IF command in nesting" do
   #   execute %w[ 
   #      :true
