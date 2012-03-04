@@ -7,12 +7,9 @@ module Stacker
     end
 
     def execute(cmd)
-      case cmd
-      when /ADD/ then add
-      when /SUBTRACT/ then subtract
-      when /MULTIPLY/ then multiply
-      else 
-        # Assume it's an integer
+      if %(ADD SUBTRACT MULTIPLY DIVIDE).include?(cmd)
+        send(cmd.downcase)
+      else
         push(cmd.to_i)
       end
     end
@@ -22,9 +19,7 @@ module Stacker
     end
 
     def subtract
-      b = pop
-      a = pop
-
+      b, a = pop, pop
       push(a - b)
     end
 
@@ -32,6 +27,10 @@ module Stacker
       push(pop * pop)
     end
 
+    def divide
+      b, a = pop, pop
+      push(a / b)
+    end
     private 
 
     def push(e)

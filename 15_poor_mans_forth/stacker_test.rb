@@ -41,15 +41,15 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([30])
   end
 
-  # it "implements DIVIDE" do
-  #   execute %w[
-  #     6
-  #     2
-  #     DIVIDE
-  #     ]
-  #     
-  #   interpreter.stack.must_equal([3])
-  # end
+  it "implements DIVIDE" do
+    execute %w[
+      6
+      2
+      DIVIDE
+      ]
+      
+    interpreter.stack.must_equal([3])
+  end
   # 
   # it "implements MOD" do
   #   execute %w[
