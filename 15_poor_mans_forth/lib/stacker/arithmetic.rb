@@ -4,8 +4,8 @@ module Stacker
   class Arithmetic
     include StackOperations
 
-    def initialize(stack)
-      @stack = stack
+    def initialize(data)
+      @data = data
     end
     
     def execute(cmd)

@@ -6,12 +6,14 @@ module Stacker
   class Interpreter
     include StackOperations
 
-    attr_reader :stack
-
     def initialize
-      @stack = []
-      @arithmetic = Arithmetic.new(@stack)
-      @logic = Logic.new(@stack)
+      @data = []
+      @arithmetic = Arithmetic.new(@data)
+      @logic = Logic.new(@data, self)
+    end
+
+    def stack
+      @data
     end
 
     def execute(cmd)

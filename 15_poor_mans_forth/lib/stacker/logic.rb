@@ -4,12 +4,13 @@ module Stacker
   class Logic
     include StackOperations
 
-    def initialize(stack)
-      @stack = stack
+    def initialize(data, interpreter)
+      @data = data
+      @interpreter = interpreter
     end
     
     def execute(cmd)
-      method_name = cmd.gsub(/=/, 'equals')
+      method_name = cmd.downcase.gsub(/=/, 'equals')
       send(method_name)
     end
 
@@ -25,6 +26,13 @@ module Stacker
 
     def equals
       push pop == pop ? :true : :false
+    end
+
+    def if
+      test = pop
+      puts "Test is #{test}"
+      if test == :true
+      end
     end
   end
 end
