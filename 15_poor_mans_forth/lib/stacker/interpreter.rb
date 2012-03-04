@@ -1,72 +1,32 @@
-module Stacker
+require 'stacker/arithmetic'
+require 'stacker/logic'
+require 'stacker/stack_operations'
 
+module Stacker
   class Interpreter
+    include StackOperations
+
     attr_reader :stack
 
     def initialize
       @stack = []
-    end
-
-    def command_map
+      @arithmetic = Arithmetic.new(@stack)
+      @logic = Logic.new(@stack)
     end
 
     def execute(cmd)
-      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD < >).include?(cmd)
-        send(cmd.downcase)
-      elsif cmd == "="
-        equals
+      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD).include?(cmd)
+        @arithmetic.execute(cmd)
+      elsif %(< > =).include?(cmd)
+        @logic.execute(cmd)
       else
-        push(cmd.to_i)
+        push_literal(cmd)
       end
       # puts "After #{cmd}, stack is #{stack}"
     end
 
-    def add
-      push(pop + pop)
-    end
-
-    def subtract
-      b, a = pop, pop
-      push(a - b)
-    end
-
-    def multiply
-      push(pop * pop)
-    end
-
-    def divide
-      b, a = pop, pop
-      push(a / b)
-    end
-
-    def mod
-      b, a = pop, pop
-      push a % b
-    end
-
-    def <
-      b, a = pop, pop
-      push a < b ? :true : :false
-    end
-
-    def >
-      b, a = pop, pop
-      push a > b ? :true : :false
-    end
-
-    def equals
-      push pop == pop ? :true : :false
-    end
-
-    private 
-
-    # XXX: use delegation
-    def push(e)
-      stack.push(e)
-    end
-
-    def pop
-      stack.pop
+    def push_literal(cmd)
+      push(cmd.to_i)
     end
   end
 end
