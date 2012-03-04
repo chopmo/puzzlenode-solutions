@@ -7,11 +7,12 @@ module Stacker
     end
 
     def execute(cmd)
-      if %(ADD SUBTRACT MULTIPLY DIVIDE).include?(cmd)
+      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD).include?(cmd)
         send(cmd.downcase)
       else
         push(cmd.to_i)
       end
+      puts "After #{cmd}, stack is #{stack}"
     end
 
     def add
@@ -31,14 +32,20 @@ module Stacker
       b, a = pop, pop
       push(a / b)
     end
+
+    def mod
+      b, a = pop, pop
+      push a % b
+    end
     private 
 
+    # XXX: use delegation
     def push(e)
-      stack.unshift(e)
+      stack.push(e)
     end
 
     def pop
-      stack.shift
+      stack.pop
     end
   end
 end

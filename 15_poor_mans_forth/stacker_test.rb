@@ -50,19 +50,19 @@ describe "Stacker::Interpreter" do
       
     interpreter.stack.must_equal([3])
   end
-  # 
-  # it "implements MOD" do
-  #   execute %w[
-  #     4
-  #     3
-  #     MOD
-  #     15
-  #     3
-  #     MOD
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([1,0])
-  # end
+  
+  it "implements MOD" do
+    execute %w[
+      4
+      3
+      MOD
+      15
+      3
+      MOD
+    ]
+    
+    interpreter.stack.must_equal([1,0])
+  end
   # 
   # it "implements <" do
   #   execute %w[
