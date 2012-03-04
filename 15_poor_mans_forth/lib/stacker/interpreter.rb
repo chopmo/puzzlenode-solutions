@@ -1,14 +1,12 @@
-require 'stacker/root_interpreter'
+require 'stacker/contexts'
 
 module Stacker
   class Interpreter
-    include StackOperations
-
     attr_reader :stack
 
     def initialize
       @stack = []
-      @interpreters = [RootInterpreter.new(@stack)]
+      @interpreters = [Contexts::Root.new(self)]
     end
 
     def execute(cmd)
