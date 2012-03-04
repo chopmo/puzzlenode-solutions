@@ -6,9 +6,14 @@ module Stacker
       @stack = []
     end
 
+    def command_map
+    end
+
     def execute(cmd)
-      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD <).include?(cmd)
+      if %(ADD SUBTRACT MULTIPLY DIVIDE MOD < >).include?(cmd)
         send(cmd.downcase)
+      elsif cmd == "="
+        equals
       else
         push(cmd.to_i)
       end
@@ -42,6 +47,16 @@ module Stacker
       b, a = pop, pop
       push a < b ? :true : :false
     end
+
+    def >
+      b, a = pop, pop
+      push a > b ? :true : :false
+    end
+
+    def equals
+      push pop == pop ? :true : :false
+    end
+
     private 
 
     # XXX: use delegation

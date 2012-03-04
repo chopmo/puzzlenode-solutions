@@ -76,32 +76,32 @@ describe "Stacker::Interpreter" do
 
     interpreter.stack.must_equal([:true, :false])
   end
-  # 
-  # it "implements >" do
-  #   execute %w[
-  #     3
-  #     10
-  #     >
-  #     5
-  #     4
-  #     >
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([:false, :true])
-  # end
+  
+  it "implements >" do
+    execute %w[
+      3
+      10
+      >
+      5
+      4
+      >
+    ]
+    
+    interpreter.stack.must_equal([:false, :true])
+  end
 
-  # it "implements =" do
-  #   execute %w[
-  #     1
-  #     1
-  #     =
-  #     1
-  #     2
-  #     =
-  #   ]
+  it "implements =" do
+    execute %w[
+      1
+      1
+      =
+      1
+      2
+      =
+    ]
 
-  #   interpreter.stack.must_equal([:true, :false])
-  # end
+    interpreter.stack.must_equal([:true, :false])
+  end
   # 
   # it "implements the IF command" do
   #   execute %w[
