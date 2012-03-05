@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), "lib")
+require 'secrets'
+
+solver = Secrets::Solver.new(ARGV[0])
+solver.run
