@@ -6,6 +6,7 @@ module Stacker
 
     def initialize
       @stack = []
+      @full_stack = []
       @contexts = [Contexts::Root.new(self)]
     end
 
@@ -28,6 +29,30 @@ module Stacker
         raise "Unable to find parent context of #{child}"
       end
       @contexts[parent_idx]
+    end
+
+    def root_context
+      @contexts.first
+    end
+
+    def push(x)
+      if active?
+        @stack.push(x)
+      end
+      @full_stack.push(x)
+    end
+
+    def pop
+      if active?
+        @stack.pop
+      end
+      @full_stack.pop
+    end
+
+    private 
+
+    def active?
+      @contexts.all?(&:active?)
     end
   end
 end

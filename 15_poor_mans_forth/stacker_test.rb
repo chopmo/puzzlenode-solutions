@@ -121,31 +121,31 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([3, 10])
   end
   
-  # it "implements the IF command in nesting" do
-  #   execute %w[ 
-  #      :true
-  #      IF
-  #      :false
-  #      IF
-  #      1
-  #      ELSE
-  #      2
-  #      THEN
-  #      3
-  #      ELSE
-  #      :true
-  #      IF
-  #      4
-  #      ELSE
-  #      5
-  #      THEN
-  #      6
-  #      THEN
-  #      7
-  #    ]
+  it "implements the IF command in nesting" do
+    execute %w[ 
+       :true
+       IF
+       :false
+       IF
+       1
+       ELSE
+       2
+       THEN
+       3
+       ELSE
+       :true
+       IF
+       4
+       ELSE
+       5
+       THEN
+       6
+       THEN
+       7
+     ]
 
-  #   interpreter.stack.must_equal([2,3,7])
-  # end
+    interpreter.stack.must_equal([2,3,7])
+  end
   # 
   # it "implements the IF command in another 2-level nesting" do
   #   execute %w[

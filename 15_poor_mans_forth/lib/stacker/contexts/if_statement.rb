@@ -18,9 +18,7 @@ module Stacker
         when /ELSE/ then enter_else
         when /THEN/ then finish
         else
-          if @is_true != @in_else_block
-            parent_context.execute(cmd) 
-          end
+          root_context.execute(cmd) 
         end
       end
 
@@ -30,6 +28,10 @@ module Stacker
 
       def finish
         @interpreter.pop_context
+      end
+
+      def active?
+        @in_else_block != @is_true
       end
     end
   end

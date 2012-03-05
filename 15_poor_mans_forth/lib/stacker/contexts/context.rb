@@ -9,12 +9,20 @@ module Stacker
         @interpreter.parent_context_of(self)
       end
 
+      def root_context
+        @interpreter.root_context
+      end
+
       def push(x)
-        @interpreter.stack.push(x)
+        @interpreter.push(x)
       end
 
       def pop
-        @interpreter.stack.pop
+        @interpreter.pop
+      end
+
+      def active?
+        true
       end
     end
   end

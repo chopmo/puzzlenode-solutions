@@ -40,6 +40,7 @@ module Stacker
         b, a = pop, pop
         push a % b
       end
+
       def <
         b, a = pop, pop
         push a < b ? :true : :false
