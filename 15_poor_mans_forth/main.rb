@@ -6,4 +6,4 @@ lines.each do |line|
   interpreter.execute(line)
 end
 
-puts interpreter.stack.join("\n")
+puts interpreter.stack.reverse.map(&:inspect).join("\n")

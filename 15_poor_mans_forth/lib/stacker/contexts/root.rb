@@ -96,7 +96,7 @@ module Stacker
       end
 
       def call_procedure(name)
-        @procedures[name].run
+        @procedures[name].run if @interpreter.active?
       end
 
       def dup
