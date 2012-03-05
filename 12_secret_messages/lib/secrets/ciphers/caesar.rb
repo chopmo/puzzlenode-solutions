@@ -1,6 +1,6 @@
 module Secrets
   module Ciphers
-    class Caesar
+    class Caesar < Cipher
       attr_accessor :shift
 
       def initialize(shift = 0)
@@ -13,10 +13,6 @@ module Secrets
 
       def decrypt(text)
         text.chars.map { |c| shift_char(c, -1) }.join
-      end
-
-      def letters
-        ('A'..'Z').to_a
       end
 
       def valid_shifts
