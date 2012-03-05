@@ -12,7 +12,6 @@ module Stacker
         else
           push_literal(cmd)
         end
-        # puts "After executing #{cmd}: #{@interpreter.stack}"
       end
 
       def push_literal(cmd)

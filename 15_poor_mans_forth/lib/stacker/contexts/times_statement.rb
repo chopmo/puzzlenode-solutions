@@ -17,6 +17,7 @@ module Stacker
       def execute(cmd)
         if (cmd == "/TIMES")
           run
+          @interpreter.pop_context
         else
           @commands.push(cmd)
         end
@@ -28,7 +29,6 @@ module Stacker
             root_context.execute(cmd)
           end
         end
-        @interpreter.pop_context
       end
     end
   end

@@ -12,6 +12,9 @@ module Stacker
 
     def execute(cmd)
       @contexts.last.execute(cmd)
+      if active?
+        puts "After executing #{cmd}: #{stack}"
+      end
     end
 
     def push_context(ctx)
@@ -27,17 +30,14 @@ module Stacker
     end
 
     def push(x)
-      if active?
-        @stack.push(x)
-      end
+      @stack.push(x) if active?
       @full_stack.push(x)
     end
 
     def pop
-      if active?
-        @stack.pop
-      end
-      @full_stack.pop
+      x = @full_stack.pop
+      x = @stack.pop if active?
+      x
     end
 
     private 
