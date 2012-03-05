@@ -16,9 +16,7 @@ module Turtles
 
     def parse_input
       @commands = []
-      @lines.map { |l|
-        parse_line(l)
-      }
+      @lines.map { |l| parse_line(l.strip) }
     end
 
     def parse_line(l)

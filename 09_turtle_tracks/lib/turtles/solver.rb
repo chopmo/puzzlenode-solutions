@@ -25,14 +25,26 @@ module Turtles
     def run
       @canvas = Canvas.new(canvas_size)
 
+      puts @turtle
+
       @canvas.mark(@turtle.position)
       while cmd = @interpreter.read_command
         @turtle.execute(cmd)
-        @canvas.mark(@turtle.position) while @turtle.move
+        puts "Executing #{cmd}: #{@turtle}"
+
+        while @turtle.move
+          puts "Moving: #{@turtle}"
+          @canvas.mark(@turtle.position)
+        end
       end
 
       puts "Resulting canvas:"
       puts @canvas.to_s
+
+      puts "Also writing canvas to solution.txt"
+      File.open("solution.txt", "w") do |f|
+        f.write(@canvas.to_s)
+      end
     end
   end
 end

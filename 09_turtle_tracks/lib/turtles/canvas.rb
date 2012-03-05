@@ -2,8 +2,7 @@ module Turtles
   class Canvas
     def initialize(size)
       @data = []
-      @size = size
-      @size.times do
+      size.times do
         row = []
         size.times do
           row << "."
@@ -13,13 +12,8 @@ module Turtles
     end
 
     def mark(position)
-      x, y = translate(position)
-      @data[y][x] = "X"
-    end
-
-    def translate(position)
       x, y = *position
-      [(x + @size/2).floor, (y + @size/2).floor]
+      @data[y][x] = "X"
     end
     
     def to_s
