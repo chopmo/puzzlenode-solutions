@@ -6,14 +6,32 @@ module Stacker
   module Contexts
     class Root < Context
       def execute(cmd)
-        if %(< > = IF ADD SUBTRACT MULTIPLY DIVIDE MOD TIMES).include?(cmd)
-          method_name = cmd.downcase.gsub(/=/, 'equals')
-          send(method_name)
+        command = cmd.split.first
+        args = cmd.split.drop(1)
+
+        method = command_map[command]
+        if method
+          send(method.to_s, *args)
         else
           push_literal(cmd)
         end
       end
-
+        
+      def command_map
+        {
+          "<" => :less_than,
+          ">" => :greater_than,
+          "=" => :equals,
+          "IF" => :if,
+          "ADD" => :add,
+          "SUBTRACT" => :subtract,
+          "MULTIPLY" => :multiply,
+          "DIVIDE" => :divide,
+          "MOD" => :mod,
+          "TIMES" => :times
+        }
+      end
+      
       def push_literal(cmd)
         push(eval(cmd))
       end
@@ -41,12 +59,12 @@ module Stacker
         push a % b
       end
 
-      def <
+      def less_than
         b, a = pop, pop
         push a < b ? :true : :false
       end
 
-      def >
+      def greater_than
         b, a = pop, pop
         push a > b ? :true : :false
       end
