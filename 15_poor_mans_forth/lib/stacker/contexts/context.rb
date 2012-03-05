@@ -5,10 +5,6 @@ module Stacker
         @interpreter = interpreter
       end
 
-      def parent_context
-        @interpreter.parent_context_of(self)
-      end
-
       def root_context
         @interpreter.root_context
       end

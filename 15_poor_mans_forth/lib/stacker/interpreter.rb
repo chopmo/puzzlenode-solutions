@@ -22,15 +22,6 @@ module Stacker
       @contexts.pop
     end
 
-    def parent_context_of(child)
-      child_idx = @contexts.rindex(child)
-      parent_idx = child_idx - 1
-      if parent_idx < 0
-        raise "Unable to find parent context of #{child}"
-      end
-      @contexts[parent_idx]
-    end
-
     def root_context
       @contexts.first
     end
