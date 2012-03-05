@@ -53,7 +53,7 @@ module Turtles
     end
 
     def y_delta
-      Math.cos(deg_to_rad(@orientation)).round
+      Math.cos(deg_to_rad(@orientation)).round * -1
     end
 
     def deg_to_rad(degrees)
