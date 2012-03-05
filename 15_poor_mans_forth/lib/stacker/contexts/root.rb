@@ -1,11 +1,12 @@
 require 'stacker/contexts/context'
 require 'stacker/contexts/if_statement'
+require 'stacker/contexts/times_statement'
 
 module Stacker
   module Contexts
     class Root < Context
       def execute(cmd)
-        if %(< > = IF ADD SUBTRACT MULTIPLY DIVIDE MOD).include?(cmd)
+        if %(< > = IF ADD SUBTRACT MULTIPLY DIVIDE MOD TIMES).include?(cmd)
           method_name = cmd.downcase.gsub(/=/, 'equals')
           send(method_name)
         else
@@ -57,6 +58,10 @@ module Stacker
 
       def if
         IfStatement.create(@interpreter)
+      end
+
+      def times
+        TimesStatement.create(@interpreter)
       end
     end
   end

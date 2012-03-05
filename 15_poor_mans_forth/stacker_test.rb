@@ -243,18 +243,18 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([4,6,7,15])
   end
 
-  # it "implements TIMES command" do
-  #   execute %w[
-  #     5
-  #     3
-  #     TIMES
-  #     1
-  #     ADD
-  #     /TIMES
-  #   ]
+  it "implements TIMES command" do
+    execute %w[
+      5
+      3
+      TIMES
+      1
+      ADD
+      /TIMES
+    ]
 
-  #   interpreter.stack.must_equal([8])
-  # end
+    interpreter.stack.must_equal([8])
+  end
 
   # it "implements TIMES inside of IF command" do
   #   execute %w[
