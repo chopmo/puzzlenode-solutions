@@ -308,19 +308,19 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([17])
   end
 
-  # it "implements PROCEDURE command" do
-  #   execute %w[
-  #     PROCEDURE\ DOUBLE
-  #     2
-  #     MULTIPLY
-  #     /PROCEDURE
-  #     100
-  #     DOUBLE
-  #     DOUBLE
-  #   ]
+  it "implements PROCEDURE command" do
+    execute %w[
+      PROCEDURE\ DOUBLE
+      2
+      MULTIPLY
+      /PROCEDURE
+      100
+      DOUBLE
+      DOUBLE
+    ]
 
-  #   interpreter.stack.must_equal([400])
-  # end
+    interpreter.stack.must_equal([400])
+  end
   # 
   # it "implements DUP command" do
   #   execute %w[

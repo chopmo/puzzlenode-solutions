@@ -27,6 +27,10 @@ module Stacker
       @contexts.pop
     end
 
+    def add_procedure(name, procedure)
+      root_context.add_procedure(name, procedure)
+    end
+
     def root_context
       @contexts.first
     end

@@ -1,17 +1,22 @@
 require 'stacker/contexts/context'
 require 'stacker/contexts/if_statement'
 require 'stacker/contexts/times_statement'
+require 'stacker/contexts/procedure'
 
 module Stacker
   module Contexts
     class Root < Context
-      def execute(cmd)
-        command = cmd.split.first
-        args = cmd.split.drop(1)
+      def initialize(interpreter)
+        super(interpreter)
+        @procedures = {}
+      end
 
-        method = command_map[command]
-        if method
-          send(method.to_s, *args)
+      def execute(cmd)
+        if command = command_map[cmd.split.first]
+          args = cmd.split.drop(1)
+          send(command.to_s, *args)
+        elsif @procedures.keys.include?(cmd)
+          call_procedure(cmd)
         else
           push_literal(cmd)
         end
@@ -28,7 +33,8 @@ module Stacker
           "MULTIPLY" => :multiply,
           "DIVIDE" => :divide,
           "MOD" => :mod,
-          "TIMES" => :times
+          "TIMES" => :times,
+          "PROCEDURE" => :define_procedure
         }
       end
       
@@ -79,6 +85,14 @@ module Stacker
 
       def times
         TimesStatement.create(@interpreter)
+      end
+
+      def define_procedure(name)
+        @procedures[name] = Procedure.create(@interpreter)
+      end
+
+      def call_procedure(name)
+        @procedures[name].run
       end
     end
   end
