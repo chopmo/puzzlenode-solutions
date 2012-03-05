@@ -9,7 +9,8 @@ module Stacker
 
       def initialize(interpreter)
         super
-        @is_true = (pop == ":true")
+        @is_true = (pop == :true)
+        @in_else_block = false
       end
 
       def execute(cmd)

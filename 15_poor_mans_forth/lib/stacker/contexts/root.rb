@@ -11,41 +11,42 @@ module Stacker
         else
           push_literal(cmd)
         end
+        # puts "After executing #{cmd}: #{@interpreter.stack}"
       end
 
       def push_literal(cmd)
-        push(cmd)
+        push(eval(cmd))
       end
 
       def add
-        push(pop_int + pop_int)
+        push(pop + pop)
       end
 
       def subtract
-        b, a = pop_int, pop_int
+        b, a = pop, pop
         push(a - b)
       end
 
       def multiply
-        push(pop_int * pop_int)
+        push(pop * pop)
       end
 
       def divide
-        b, a = pop_int, pop_int
+        b, a = pop, pop
         push(a / b)
       end
 
       def mod
-        b, a = pop_int, pop_int
+        b, a = pop, pop
         push a % b
       end
       def <
-        b, a = pop_int, pop_int
+        b, a = pop, pop
         push a < b ? :true : :false
       end
 
       def >
-        b, a = pop_int, pop_int
+        b, a = pop, pop
         push a > b ? :true : :false
       end
 

@@ -16,10 +16,6 @@ module Stacker
       def pop
         @interpreter.stack.pop
       end
-
-      def pop_int
-        pop.to_i
-      end
     end
   end
 end
