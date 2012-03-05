@@ -34,7 +34,8 @@ module Stacker
           "DIVIDE" => :divide,
           "MOD" => :mod,
           "TIMES" => :times,
-          "PROCEDURE" => :define_procedure
+          "PROCEDURE" => :define_procedure,
+          "DUP" => :dup
         }
       end
       
@@ -94,6 +95,14 @@ module Stacker
       def call_procedure(name)
         @procedures[name].run
       end
+
+      def dup
+        x = pop
+        2.times do
+          push x
+        end
+      end
     end
+
   end
 end
