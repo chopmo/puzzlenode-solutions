@@ -332,15 +332,15 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([1,2,2])
   end
 
-  # it "implements SWAP command" do
-  #   execute %w[
-  #     1
-  #     2
-  #     SWAP
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([2,1])
-  # end
+  it "implements SWAP command" do
+    execute %w[
+      1
+      2
+      SWAP
+    ]
+    
+    interpreter.stack.must_equal([2,1])
+  end
   # 
   # it "implements DROP" do
   #   execute %w[
