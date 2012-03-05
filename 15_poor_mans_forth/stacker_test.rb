@@ -11,250 +11,250 @@ describe "Stacker::Interpreter" do
 
   let(:interpreter) { Stacker::Interpreter.new }
 
-  # it "implements ADD" do
-  #   execute %w[
-  #     2
-  #     3
-  #     ADD
-  #   ]
+  it "implements ADD" do
+    execute %w[
+      2
+      3
+      ADD
+    ]
 
-  #   interpreter.stack.must_equal([5])
-  # end
+    interpreter.stack.must_equal([5])
+  end
 
-  # it "implements SUBTRACT command" do
-  #   execute %w[
-  #     1
-  #     2
-  #     SUBTRACT
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([-1])
-  # end
-  # 
-  # it "implements MULTIPLY" do
-  #   execute %w[
-  #     3
-  #     10
-  #     MULTIPLY
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([30])
-  # end
+  it "implements SUBTRACT command" do
+    execute %w[
+      1
+      2
+      SUBTRACT
+    ]
+    
+    interpreter.stack.must_equal([-1])
+  end
+  
+  it "implements MULTIPLY" do
+    execute %w[
+      3
+      10
+      MULTIPLY
+    ]
+    
+    interpreter.stack.must_equal([30])
+  end
 
-  # it "implements DIVIDE" do
-  #   execute %w[
-  #     6
-  #     2
-  #     DIVIDE
-  #     ]
-  #     
-  #   interpreter.stack.must_equal([3])
-  # end
-  # 
-  # it "implements MOD" do
-  #   execute %w[
-  #     4
-  #     3
-  #     MOD
-  #     15
-  #     3
-  #     MOD
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([1,0])
-  # end
-  # 
-  # it "implements <" do
-  #   execute %w[
-  #     3
-  #     10
-  #     <
-  #     5
-  #     4
-  #     <
-  #   ]
+  it "implements DIVIDE" do
+    execute %w[
+      6
+      2
+      DIVIDE
+      ]
+      
+    interpreter.stack.must_equal([3])
+  end
+  
+  it "implements MOD" do
+    execute %w[
+      4
+      3
+      MOD
+      15
+      3
+      MOD
+    ]
+    
+    interpreter.stack.must_equal([1,0])
+  end
+  
+  it "implements <" do
+    execute %w[
+      3
+      10
+      <
+      5
+      4
+      <
+    ]
 
-  #   interpreter.stack.must_equal([:true, :false])
-  # end
-  # 
-  # it "implements >" do
-  #   execute %w[
-  #     3
-  #     10
-  #     >
-  #     5
-  #     4
-  #     >
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([:false, :true])
-  # end
+    interpreter.stack.must_equal([:true, :false])
+  end
+  
+  it "implements >" do
+    execute %w[
+      3
+      10
+      >
+      5
+      4
+      >
+    ]
+    
+    interpreter.stack.must_equal([:false, :true])
+  end
 
-  # it "implements =" do
-  #   execute %w[
-  #     1
-  #     1
-  #     =
-  #     1
-  #     2
-  #     =
-  #   ]
+  it "implements =" do
+    execute %w[
+      1
+      1
+      =
+      1
+      2
+      =
+    ]
 
-  #   interpreter.stack.must_equal([:true, :false])
-  # end
-  # 
-  # it "implements the IF command" do
-  #   execute %w[
-  #     :true
-  #     IF
-  #     1
-  #     2
-  #     ADD
-  #     ELSE
-  #     5
-  #     THEN
-  #     2
-  #     5
-  #     MULTIPLY
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([3, 10])
-  # end
-  # 
-  # it "implements the IF command in nesting" do
-  #   execute %w[ 
-  #      :true
-  #      IF
-  #      :false
-  #      IF
-  #      1
-  #      ELSE
-  #      2
-  #      THEN
-  #      3
-  #      ELSE
-  #      :true
-  #      IF
-  #      4
-  #      ELSE
-  #      5
-  #      THEN
-  #      6
-  #      THEN
-  #      7
-  #    ]
+    interpreter.stack.must_equal([:true, :false])
+  end
+  
+  it "implements the IF command" do
+    execute %w[
+      :true
+      IF
+      1
+      2
+      ADD
+      ELSE
+      5
+      THEN
+      2
+      5
+      MULTIPLY
+    ]
+    
+    interpreter.stack.must_equal([3, 10])
+  end
+  
+  it "implements the IF command in nesting" do
+    execute %w[ 
+       :true
+       IF
+       :false
+       IF
+       1
+       ELSE
+       2
+       THEN
+       3
+       ELSE
+       :true
+       IF
+       4
+       ELSE
+       5
+       THEN
+       6
+       THEN
+       7
+     ]
 
-  #   interpreter.stack.must_equal([2,3,7])
-  # end
-  # 
-  # it "implements the IF command in another 2-level nesting" do
-  #   execute %w[
-  #     :false
-  #     IF
-  #     0
-  #     :false
-  #     IF
-  #     1
-  #     2
-  #     ELSE
-  #     3
-  #     2
-  #     2
-  #     ADD
-  #     THEN
-  #     5
-  #     2
-  #     3
-  #     MULTIPLY
-  #     ELSE
-  #     3
-  #     4
-  #     ADD
-  #     7
-  #     8
-  #     <
-  #     IF
-  #     2
-  #     4
-  #     MULTIPLY
-  #     3
-  #     3
-  #     MULTIPLY
-  #     ELSE
-  #     10
-  #     11
-  #     THEN
-  #     12
-  #     13
-  #     THEN
-  #     14
-  #     15
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([7,8,9,12,13,14,15])
-  # end
+    interpreter.stack.must_equal([2,3,7])
+  end
+  
+  it "implements the IF command in another 2-level nesting" do
+    execute %w[
+      :false
+      IF
+      0
+      :false
+      IF
+      1
+      2
+      ELSE
+      3
+      2
+      2
+      ADD
+      THEN
+      5
+      2
+      3
+      MULTIPLY
+      ELSE
+      3
+      4
+      ADD
+      7
+      8
+      <
+      IF
+      2
+      4
+      MULTIPLY
+      3
+      3
+      MULTIPLY
+      ELSE
+      10
+      11
+      THEN
+      12
+      13
+      THEN
+      14
+      15
+    ]
+    
+    interpreter.stack.must_equal([7,8,9,12,13,14,15])
+  end
 
-  # it "implements the IF command in 3-level nesting" do
-  #   execute %w[
-  #     :true
-  #     IF
-  #     :false
-  #       IF
-  #       :false
-  #         IF
-  #         1
-  #         ELSE
-  #         2
-  #         THEN
-  #         3
-  #       ELSE
-  #       :true
-  #         IF
-  #         4
-  #         ELSE
-  #         5
-  #         THEN
-  #         6
-  #       THEN
-  #       7
-  #     ELSE
-  #     :false
-  #       IF
-  #       :true
-  #         IF
-  #         8
-  #         ELSE
-  #         9
-  #         THEN
-  #         10
-  #       ELSE
-  #       :true
-  #         IF
-  #         11
-  #         ELSE
-  #         12
-  #         THEN
-  #         13
-  #       THEN
-  #       14
-  #     THEN
-  #     15
-  #     ]
-  #   interpreter.stack.must_equal([4,6,7,15])
-  # end
+  it "implements the IF command in 3-level nesting" do
+    execute %w[
+      :true
+      IF
+      :false
+        IF
+        :false
+          IF
+          1
+          ELSE
+          2
+          THEN
+          3
+        ELSE
+        :true
+          IF
+          4
+          ELSE
+          5
+          THEN
+          6
+        THEN
+        7
+      ELSE
+      :false
+        IF
+        :true
+          IF
+          8
+          ELSE
+          9
+          THEN
+          10
+        ELSE
+        :true
+          IF
+          11
+          ELSE
+          12
+          THEN
+          13
+        THEN
+        14
+      THEN
+      15
+      ]
+    interpreter.stack.must_equal([4,6,7,15])
+  end
 
-  # it "implements TIMES command" do
-  #   execute %w[
-  #     5
-  #     3
-  #     TIMES
-  #     1
-  #     ADD
-  #     /TIMES
-  #   ]
+  it "implements TIMES command" do
+    execute %w[
+      5
+      3
+      TIMES
+      1
+      ADD
+      /TIMES
+    ]
 
-  #   interpreter.stack.must_equal([8])
-  # end
+    interpreter.stack.must_equal([8])
+  end
 
   it "implements TIMES inside of IF command" do
     execute %w[
