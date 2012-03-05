@@ -36,7 +36,8 @@ module Stacker
           "TIMES" => :times,
           "PROCEDURE" => :define_procedure,
           "DUP" => :dup,
-          "SWAP" => :swap
+          "SWAP" => :swap,
+          "DROP" => :drop,
         }
       end
       
@@ -107,6 +108,10 @@ module Stacker
       def swap
         a, b = pop, pop
         push a; push b
+      end
+
+      def drop
+        pop
       end
     end
 

@@ -341,16 +341,16 @@ describe "Stacker::Interpreter" do
     
     interpreter.stack.must_equal([2,1])
   end
-  # 
-  # it "implements DROP" do
-  #   execute %w[
-  #     1
-  #     2
-  #     DROP
-  #   ]
-  #   
-  #   interpreter.stack.must_equal([1]) 
-  # end
+  
+  it "implements DROP" do
+    execute %w[
+      1
+      2
+      DROP
+    ]
+    
+    interpreter.stack.must_equal([1]) 
+  end
   # 
   # it "implements ROT" do
   #   execute %w[
