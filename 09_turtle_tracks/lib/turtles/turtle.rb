@@ -26,8 +26,15 @@ module Turtles
     end
 
     def fd(steps)
+      @direction = 1
       @steps_remaining = steps
     end
+
+    def bk(steps)
+      @direction = -1
+      @steps_remaining = steps
+    end
+
 
     def rotate(degrees)
       @orientation = (@orientation + degrees) % 360
