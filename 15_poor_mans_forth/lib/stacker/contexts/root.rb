@@ -38,6 +38,7 @@ module Stacker
           "DUP" => :dup,
           "SWAP" => :swap,
           "DROP" => :drop,
+          "ROT" => :rot
         }
       end
       
@@ -112,6 +113,13 @@ module Stacker
 
       def drop
         pop
+      end
+
+      def rot
+        one, two, three = pop, pop, pop
+        push two
+        push one
+        push three
       end
     end
 

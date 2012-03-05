@@ -351,21 +351,21 @@ describe "Stacker::Interpreter" do
     
     interpreter.stack.must_equal([1]) 
   end
-  # 
-  # it "implements ROT" do
-  #   execute %w[
-  #     :foo
-  #     :bar
-  #     :baz
-  #     :foobar
-  #     :quux
-  #     ROT
-  #   ]
-  #  
-  #   # ROT takes the third element on the stack and places it on the
-  #   # top of the stack, pushing the first and second element downwards
-  #   interpreter.stack.must_equal([:foo,:bar,:foobar, :quux, :baz])
-  # end
+  
+  it "implements ROT" do
+    execute %w[
+      :foo
+      :bar
+      :baz
+      :foobar
+      :quux
+      ROT
+    ]
+   
+    # ROT takes the third element on the stack and places it on the
+    # top of the stack, pushing the first and second element downwards
+    interpreter.stack.must_equal([:foo,:bar,:foobar, :quux, :baz])
+  end
 
   # it "implements support for adding arbitrary symbols to the stack" do
   #   execute %w[
