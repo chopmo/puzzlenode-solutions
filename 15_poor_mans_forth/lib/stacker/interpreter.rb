@@ -11,9 +11,11 @@ module Stacker
     end
 
     def execute(cmd)
+      # puts "Executing #{cmd}"
       @contexts.last.execute(cmd)
       # if active?
       #   puts "After executing #{cmd}: #{stack}"
+
       # end
     end
 
@@ -27,6 +29,15 @@ module Stacker
 
     def root_context
       @contexts.first
+    end
+
+    def parent_context_of(child)
+      child_idx = @contexts.rindex(child)
+      parent_idx = child_idx - 1
+      if parent_idx < 0
+        raise "Parent context of #{child} not found"
+      end
+      @contexts[parent_idx]
     end
 
     def push(x)

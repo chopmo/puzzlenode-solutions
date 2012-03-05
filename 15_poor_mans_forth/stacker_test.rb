@@ -285,28 +285,28 @@ describe "Stacker::Interpreter" do
 
     interpreter.stack.must_equal([24])
   end
-  # 
-  # it "implements IF inside of TIMES command" do
-  #   execute %w[
-  #     5
-  #     3
-  #     TIMES
-  #     :true
-  #     IF
-  #     1
-  #     ADD
-  #     ELSE
-  #     2
-  #     ADD
-  #     THEN
-  #     3
-  #     ADD
-  #     /TIMES
-  #   ]
+  
+  it "implements IF inside of TIMES command" do
+    execute %w[
+      5
+      3
+      TIMES
+      :true
+      IF
+      1
+      ADD
+      ELSE
+      2
+      ADD
+      THEN
+      3
+      ADD
+      /TIMES
+    ]
 
 
-  #   interpreter.stack.must_equal([17])
-  # end
+    interpreter.stack.must_equal([17])
+  end
 
   # it "implements PROCEDURE command" do
   #   execute %w[

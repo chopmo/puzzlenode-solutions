@@ -18,7 +18,7 @@ module Stacker
         when /ELSE/ then enter_else
         when /THEN/ then finish
         else
-          root_context.execute(cmd) 
+          parent_context.execute(cmd) 
         end
       end
 

@@ -12,10 +12,15 @@ module Stacker
         super
         @counter = pop
         @commands = []
+        @running = false
       end
 
       def execute(cmd)
-        if (cmd == "/TIMES")
+        if @running
+          # puts "RUNNING, executing #{cmd} on parent #{parent_context}"
+          parent_context.execute(cmd)
+        elsif (cmd == "/TIMES")
+          @running = true
           run
           @interpreter.pop_context
         else
@@ -24,9 +29,10 @@ module Stacker
       end
 
       def run
+        # puts "Parent context is #{parent_context}"
         @counter.times do 
           @commands.each do |cmd|
-            root_context.execute(cmd)
+            @interpreter.execute(cmd)
           end
         end
       end
