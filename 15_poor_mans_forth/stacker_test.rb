@@ -367,15 +367,15 @@ describe "Stacker::Interpreter" do
     interpreter.stack.must_equal([:foo,:bar,:foobar, :quux, :baz])
   end
 
-  # it "implements support for adding arbitrary symbols to the stack" do
-  #   execute %w[
-  #     :foo
-  #     :bar
-  #     :baz
-  #   ]
+  it "implements support for adding arbitrary symbols to the stack" do
+    execute %w[
+      :foo
+      :bar
+      :baz
+    ]
 
-  #   interpreter.stack.must_equal([:foo,:bar,:baz])
-  # end
+    interpreter.stack.must_equal([:foo,:bar,:baz])
+  end
 
   def execute(commands)
     commands.each { |c| interpreter.execute(c) }
