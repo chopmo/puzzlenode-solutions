@@ -23,5 +23,10 @@ module Wires
       c.should be_a Signal
       c.value.should be_false
     end
+
+    it "creates a wire from | or -" do
+      parse("-").should be_a Wire
+      parse("|").should be_a Wire
+    end
   end
 end

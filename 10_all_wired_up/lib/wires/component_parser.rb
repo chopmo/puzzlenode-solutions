@@ -8,6 +8,8 @@ module Wires
         Lightbulb.new(cell)
       when /1|0/
         Signal.new(cell)
+      when /-|\|/
+        Wire.new(cell)
       else
         fail "Unknown component #{cell}"
       end
