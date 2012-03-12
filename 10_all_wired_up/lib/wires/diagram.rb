@@ -1,13 +1,8 @@
+require 'wires/component_parser'
+require 'wires/cell'
+
 module Wires
   class Diagram
-
-    class Cell < Struct.new(:diagram, :x, :y, :value)
-      def up; diagram.at(x, y-1) end
-      def down; diagram.at(x, y+1) end
-      def left; diagram.at(x-1, y) end
-      def right; diagram.at(x+1, y) end
-    end
-
     def initialize(ascii_diagram)
       @data = ascii_diagram.lines.map { |l| l.split(//) }
     end
@@ -16,9 +11,22 @@ module Wires
       return nil unless (0...@data.size).include?(y) and (0...@data[0].size).include?(x)
       char = @data[y][x]
       return nil if char == ' '
-      Cell.new(self, x, y, char)
+      ComponentParser.parse(Cell.new(self, x, y, char))
     end
 
-  end
+    def lightbulb
+      at(*lightbulb_position)
+    end
 
+    private
+    def lightbulb_position
+      @data.each_with_index do |line, line_idx|
+        line.each_with_index do |col, col_idx|
+          return [col_idx, line_idx] if col == "@"
+        end
+      end
+      nil
+    end
+    
+  end
 end
