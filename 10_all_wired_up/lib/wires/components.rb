@@ -21,6 +21,7 @@ module Wires
   
   class Lightbulb < Component
     def value
+      left.wiretrace(:left).value
     end
   end
 
