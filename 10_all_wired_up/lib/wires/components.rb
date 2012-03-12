@@ -36,4 +36,17 @@ module Wires
       fail "Wires do not have a value. Use a Wiretrace"
     end
   end
+
+  class XorGate < Component
+    def value
+      wiretrace(:up).value ^ wiretrace(:down).value
+    end
+  end
+
+  class AndGate < Component
+    def value
+      wiretrace(:up).value && wiretrace(:down).value
+    end
+  end
+
 end

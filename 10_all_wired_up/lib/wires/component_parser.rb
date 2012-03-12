@@ -10,8 +10,12 @@ module Wires
         Signal.new(cell)
       when /-|\|/
         Wire.new(cell)
+      when /X/
+        XorGate.new(cell)
+      when /A/
+        AndGate.new(cell)
       else
-        fail "Unknown component #{cell}"
+        fail "Unknown component #{cell.value} at #{cell.x},#{cell.y}"
       end
     end
   end

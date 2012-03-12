@@ -8,7 +8,7 @@ module Wires
     end
 
     def at(x, y)
-      return nil unless (0...@data.size).include?(y) and (0...@data[0].size).include?(x)
+      return nil unless (0...@data.size).include?(y) and (0...@data[y].size).include?(x)
       char = @data[y][x]
       return nil if char == ' '
       ComponentParser.parse(Cell.new(self, x, y, char))
@@ -25,8 +25,7 @@ module Wires
           return [col_idx, line_idx] if col == "@"
         end
       end
-      nil
+      fail "Unable to find lightbulb"
     end
-    
   end
 end

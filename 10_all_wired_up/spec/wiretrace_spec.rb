@@ -19,9 +19,11 @@ module Wires
 
     it "follows up + a bend" do
       ascii_diagram = <<END
+
 1--|
    |
    @
+
 END
       target = do_trace(ascii_diagram, [3, 1], :up)
       target.should be_a Signal
@@ -42,7 +44,7 @@ END
 
     it "can be initiated from a component" do
       diagram = Diagram.new("0-----@")
-      diagram.lightbulb.left.wiretrace(:left).should be_a Signal
+      diagram.lightbulb.wiretrace(:left).should be_a Signal
     end
   end
 

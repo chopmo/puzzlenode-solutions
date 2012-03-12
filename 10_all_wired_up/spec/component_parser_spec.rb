@@ -28,5 +28,13 @@ module Wires
       parse("-").should be_a Wire
       parse("|").should be_a Wire
     end
+
+    it "creates an XOR gate from X" do
+      parse("X").should be_a XorGate
+    end
+
+    it "creates an AND gate from A" do
+      parse("A").should be_a AndGate
+    end
   end
 end
