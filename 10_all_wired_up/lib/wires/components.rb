@@ -49,4 +49,9 @@ module Wires
     end
   end
 
+  class NotGate < Component
+    def value
+      !(up ? wiretrace(:up).value : wiretrace(:down).value)
+    end
+  end
 end

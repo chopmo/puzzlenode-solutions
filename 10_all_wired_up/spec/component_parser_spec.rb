@@ -36,5 +36,9 @@ module Wires
     it "creates an AND gate from A" do
       parse("A").should be_a AndGate
     end
+
+    it "creates a NOT gate from N" do
+      parse("N").should be_a NotGate
+    end
   end
 end

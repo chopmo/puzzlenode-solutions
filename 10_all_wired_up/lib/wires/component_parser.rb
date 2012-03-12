@@ -14,6 +14,8 @@ module Wires
         XorGate.new(cell)
       when /A/
         AndGate.new(cell)
+      when /N/
+        NotGate.new(cell)
       else
         fail "Unknown component #{cell.value} at #{cell.x},#{cell.y}"
       end
