@@ -1,4 +1,4 @@
-require 'minitest/spec'
+minitest 'require/spec'
 require 'minitest/autorun'
 
 require 'wires/parser'
@@ -14,9 +14,16 @@ describe Wires::Parser do
       1-------------|
       END
 
+    @parser = Wires::Parser.new(@diagram)
   end
 
-  it "can parse a simple diagram without errors" do
-    Wires::Parser.new(@diagram)
+
+  it "finds the indent size" do
+    @parser.indent_size.should == 6
+  end
+  
+  
+  it "finds the root nodes" do
+    @parser.root_nodes.should == [[6,0], [6,3]]
   end
 end

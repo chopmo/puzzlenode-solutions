@@ -40,5 +40,9 @@ module Wires
         @diagram.at(0, 4).should be_nil
       end
     end
+
+    # it "can find the lightbulb" do
+    #   Diagram.new("1--@").lightbulb.should be_a Lightbulb
+    # end
   end
 end
