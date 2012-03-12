@@ -1,3 +1,5 @@
+require 'wires/wiretrace'
+
 module Wires
   class Component
     def initialize(cell)
@@ -12,9 +14,9 @@ module Wires
       end
     end
 
-    # def wiretrace(direction)
-    #   Wiretrace.new(self, direction).target
-    # end
+    def wiretrace(direction)
+      Wiretrace.new(self, direction).target
+    end
   end
   
   class Lightbulb < Component

@@ -1,5 +1,5 @@
 module Wires
-  class WireTrace
+  class Wiretrace
     attr_reader :target
 
     def initialize(start_cell, direction)
@@ -19,7 +19,7 @@ module Wires
         when Wire
           cell = next_cell
         else
-          # We're at the target
+          # we're at the target
           @target = next_cell
           break
         end
