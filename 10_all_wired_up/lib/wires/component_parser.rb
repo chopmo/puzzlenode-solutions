@@ -1,4 +1,4 @@
-require 'wires/lightbulb'
+require 'wires/components'
 
 module Wires
   class ComponentParser
@@ -6,6 +6,8 @@ module Wires
       case cell.value
       when /@/
         Lightbulb.new(cell)
+      when /1|0/
+        Signal.new(cell)
       else
         fail "Unknown component #{cell}"
       end
