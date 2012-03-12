@@ -16,6 +16,8 @@ module Wires
         AndGate.new(cell)
       when /N/
         NotGate.new(cell)
+      when /O/
+        OrGate.new(cell)
       else
         fail "Unknown component #{cell.value} at #{cell.x},#{cell.y}"
       end

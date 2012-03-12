@@ -54,4 +54,10 @@ module Wires
       !(up ? wiretrace(:up).value : wiretrace(:down).value)
     end
   end
+
+  class OrGate < Component
+    def value
+      wiretrace(:up).value || wiretrace(:down).value
+    end
+  end
 end

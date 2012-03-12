@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby -W
+$LOAD_PATH.push("lib")
+
+require 'wires/solver'
+
+puts Wires::Solver.solve_file(ARGV[0])

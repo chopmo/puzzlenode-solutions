@@ -40,5 +40,9 @@ module Wires
     it "creates a NOT gate from N" do
       parse("N").should be_a NotGate
     end
+
+    it "creates an OR gate from O" do
+      parse("O").should be_a OrGate
+    end
   end
 end
