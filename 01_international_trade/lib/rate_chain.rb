@@ -15,18 +15,10 @@ class RateChain
 
   private
   def get_subchain(from, to)
-    subchain = []
-    @rates.each do |rate|
-      if subchain.empty?
-        if rate.from == from
-          subchain << rate
-          return subchain if rate.to == to
-        end
-      else
-        subchain << rate
-        return subchain if rate.to == to
-      end
-    end
-    nil
+    subchain = @rates.drop_while { |r| r.from != from }
+    subchain = subchain.reverse.drop_while { |r| r.to != to }
+    return nil if subchain.empty? || subchain.first.to != to
+
+    subchain.reverse
   end
 end
