@@ -27,4 +27,10 @@ describe RateChain do
     chain.supports?("AUD", "USD").should be_true
     chain.supports?("CAD", "USD").should be_true
   end
+
+  it "can convert an amount" do
+    rates = [ Rate.new("DKK", "USD", 1.5), Rate.new("EUR", "DKK", 1.5) ]
+    chain = RateChain.from_rates(rates, "USD")
+    chain.convert(100, "EUR", "USD").should == 225.0
+  end
 end
