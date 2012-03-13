@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby -W
+$LOAD_PATH.push("lib")
+
+require 'awesome_print'
+
+require 'rate_parser'
+
+ap RateParser.parse(open(ARGV[0]).read)
+
