@@ -3,7 +3,8 @@ require 'nokogiri'
 require 'rate'
 
 class RateParser
-  def self.parse(xml)
+  def self.parse(xml_file)
+    xml = open(xml_file).read
     rates = []
     doc = Nokogiri::XML(xml)
     doc.css("rate").each do |rate_node|

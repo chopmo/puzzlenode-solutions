@@ -7,8 +7,8 @@ require 'solver'
 
 describe Solver do
   it "solves the sample case" do
-    rates = RateParser.parse(open(File.join(File.dirname(__FILE__), "../data/SAMPLE_RATES.xml")).read)
-    rate_chain = RateChain.from_rates(rates, "USD")
+    rates = RateParser.parse(File.join(File.dirname(__FILE__), "../data/SAMPLE_RATES.xml"))
+    rate_chain = ChainBuilder.build(rates, "USD")
 
     transactions = TransactionParser.parse(File.join(File.dirname(__FILE__), "../data/SAMPLE_TRANS.csv"))
 

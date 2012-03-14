@@ -1,10 +1,19 @@
 #!/usr/bin/env ruby -W
 $LOAD_PATH.push("lib")
 
-require 'awesome_print'
-
 require 'rate_parser'
+require 'transaction_parser'
+require 'solver'
+require 'chain_builder'
 
-# all_rates = RateParser.parse(open(ARGV[0]).read)
-# chain = RateChain.from_rates(all_rates, USD)
+rate_file = ARGV[0]
+transaction_file = ARGV[1]
+
+rates = RateParser.parse(rate_file)
+transactions = TransactionParser.parse(transaction_file)
+
+rate_chain = ChainBuilder.build(rates, "USD")
+
+solver = Solver.new(transactions, "DM1182", rate_chain, "USD")
+puts solver.solution.to_f
 

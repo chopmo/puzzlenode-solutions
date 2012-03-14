@@ -1,4 +1,3 @@
-require 'chain_builder'
 require 'rounding'
 
 class RateChain
@@ -18,11 +17,6 @@ class RateChain
       amount = rate.convert(amount)
     end
     bankers_round(amount)
-  end
-
-
-  def self.from_rates(rates, target_currency)
-    new(ChainBuilder.new(rates, target_currency).rate_chain)
   end
 
   private
