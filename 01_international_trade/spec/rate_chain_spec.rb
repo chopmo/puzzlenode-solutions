@@ -33,4 +33,35 @@ describe RateChain do
     chain = RateChain.from_rates(rates, "USD")
     chain.convert(100, "EUR", "USD").should == 225.0
   end
+
+  describe "bankers rounding" do
+    let(:rate_chain) { RateChain.new([Rate.new("USD", "DKK", 1.0)]) }
+    def bd(s); BigDecimal.new(s); end
+
+    def convert(amount)
+      rate_chain.convert(amount, "USD", "DKK")
+    end
+    
+    context "when fraction is 0.005" do
+
+      it "rounds up to even" do
+        convert("0.795").should == bd("0.80")
+      end
+      
+      it "rounds down to even" do
+        convert("0.565").should == bd("0.56")
+      end
+    end
+
+    context "otherwise" do
+      it "does normal rounding down" do
+        convert("0.101").should == bd("0.10")
+      end
+
+      it "does normal rounding up" do
+        convert("0.108").should == bd("0.11")
+      end
+    end
+  end
+  
 end

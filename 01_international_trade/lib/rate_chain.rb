@@ -1,6 +1,9 @@
 require 'chain_builder'
+require 'rounding'
 
 class RateChain
+  include Rounding
+
   def initialize(rates)
     @rates = rates
   end
@@ -14,7 +17,7 @@ class RateChain
     subchain(from, to).each do |rate|
       amount = rate.convert(amount)
     end
-    amount
+    bankers_round(amount)
   end
 
 
