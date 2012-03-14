@@ -1,4 +1,7 @@
 require 'rate_parser'
+require 'rate_chain'
+require 'transaction_parser'
+
 require 'solver'
 
 

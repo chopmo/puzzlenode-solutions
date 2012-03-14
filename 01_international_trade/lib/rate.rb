@@ -8,11 +8,13 @@ class Rate < Struct.new(:from, :to, :conversion)
 
   private
   def bankers_round(amount)
-    if(amount.frac == BigDecimal.new("0.5"))
+    amount *= 100
+    amount = if(amount.frac == BigDecimal.new("0.5"))
       amount.ceil.even? ? amount.ceil : amount.floor
     else
       amount.round
     end
+    amount / BigDecimal.new("100.0")
   end
 
 end

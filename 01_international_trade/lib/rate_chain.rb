@@ -10,6 +10,7 @@ class RateChain
   end
 
   def convert(amount, from, to)
+    return amount if from == to
     subchain(from, to).each do |rate|
       amount = rate.convert(amount)
     end

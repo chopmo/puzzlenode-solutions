@@ -4,25 +4,26 @@ describe Rate do
   
   describe "bankers rounding" do
     let(:rate) { Rate.new("X", "X", 1.0) }
+    def bd(s); BigDecimal.new(s); end
 
-    context "when fraction is 0.5" do
+    context "when fraction is 0.005" do
 
       it "rounds up to even" do
-        rate.convert("79.5").should == 80.0
+        rate.convert("0.795").should == bd("0.80")
       end
       
       it "rounds down to even" do
-        rate.convert("56.5").should == 56.0
+        rate.convert("0.565").should == bd("0.56")
       end
     end
 
     context "otherwise" do
       it "does normal rounding down" do
-        rate.convert("10.1").should == 10.0
+        rate.convert("0.101").should == bd("0.10")
       end
 
       it "does normal rounding up" do
-        rate.convert("10.8").should == 11.0
+        rate.convert("0.108").should == bd("0.11")
       end
     end
   end
