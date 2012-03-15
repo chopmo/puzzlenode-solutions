@@ -31,12 +31,17 @@ class Graph
     end
 
     def formatted_price
-      price.to_f.to_s
+      format("%.2f", price.to_f)
     end
 
     def to_s
       flights.map(&:to_s).join("\n ->") + "\nPRICE: #{formatted_price}\nDURATION: #{formatted_duration}"
     end
+
+    def result_format
+      "#{departs} #{arrives} #{formatted_price}"
+    end
+
   end
 
   # XXX: break out

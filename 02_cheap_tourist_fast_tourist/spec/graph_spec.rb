@@ -34,7 +34,7 @@ END
     route = g.cheapest_route
     route.departs.should == "08:00"
     route.arrives.should == "19:00"
-    route.formatted_price.should == "225.0"
+    route.formatted_price.should == "225.00"
   end
 
   it "finds the fastest route" do
@@ -43,6 +43,6 @@ END
     route = g.fastest_route
     route.departs.should == "12:00"
     route.arrives.should == "16:30"
-    route.formatted_price.should == "550.0"
+    route.formatted_price.should == "550.00"
   end
 end

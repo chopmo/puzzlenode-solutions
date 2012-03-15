@@ -28,6 +28,10 @@ describe Graph::Route do
   end
 
   it "knows its price" do
-    route.formatted_price.should == "50.0"
+    route.formatted_price.should == "50.00"
+  end
+
+  it "knows the result format" do
+    route.result_format.should == "08:00 12:45 50.00"
   end
 end
