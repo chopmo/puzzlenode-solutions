@@ -33,6 +33,9 @@ class Graph
       price.to_f.to_s
     end
 
+    def to_s
+      flights.map(&:to_s).join("\n ->") + "\nPRICE: #{formatted_price}\nDURATION: #{formatted_duration}"
+    end
   end
 
   class Node < Struct.new(:flight)
@@ -60,7 +63,6 @@ class Graph
       end
       Route.new(nodes.map(&:flight))
     end
-
   end
   
   def self.build(flights)
@@ -78,6 +80,10 @@ class Graph
 
   def routes_to(city)
     @nodes.select { |n| n.flight.to_city == city }.map(&:route)
+  end
+
+  def cheapest_route
+    routes_to("Z").sort_by(&:price).first
   end
 
 

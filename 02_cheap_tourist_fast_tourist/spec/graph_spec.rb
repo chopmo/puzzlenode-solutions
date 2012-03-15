@@ -36,13 +36,18 @@ END
   it "finds the cheapest route" do
     g = Graph.build(flights)
 
-    trip = g.cheapest_route
-    trip.departs.should == "09:00"
-    trip.arrives.should == "13:30"
-    trip.price.should == "200.00"
+    route = g.cheapest_route
+    route.departs.should == "08:00"
+    route.arrives.should == "19:00"
+    route.formatted_price.should == "225.0"
   end
 
-  # multiple trees, one per root node (source city)
-  # OR (more elegant)
-  # Pseudo root node with actual roots as connections
+  # it "finds the fastest route" do
+  #   g = Graph.build(flights)
+
+  #   route = g.fastest_route
+  #   route.departs.should == "12:00"
+  #   route.arrives.should == "16:30"
+  #   route.formatted_price.should == "550.0"
+  # end
 end
