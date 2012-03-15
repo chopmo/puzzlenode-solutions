@@ -19,6 +19,11 @@ class Graph
     end
     
     def to_s; format_node(self); end
+
+    def route
+      (previous ? previous.route : []) + [self]
+    end
+
   end
   
   def self.build(flights)
@@ -33,6 +38,11 @@ class Graph
   attr_reader :root, :nodes
 
   def to_s; format_graph(self); end
+
+  def routes_to(city)
+    @nodes.select { |n| n.flight.to_city == city }.map(&:route)
+  end
+
 
   private
   def connect_flights(flights)
