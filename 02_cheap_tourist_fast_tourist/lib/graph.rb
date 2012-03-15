@@ -13,13 +13,17 @@ class Graph
     def departs; flights.first.departs; end
     def arrives; flights.last.arrives; end
 
-    def duration
-      secs = Time.parse(arrives) - Time.parse(departs)
-      minutes = secs / 60
+
+    def formatted_duration
+      minutes = duration / 60
       hours = minutes / 60
       minutes = minutes % 60
-
+      
       format("%02d:%02d", hours, minutes)
+    end
+    
+    def duration
+      Time.parse(arrives) - Time.parse(departs)
     end
 
     def price

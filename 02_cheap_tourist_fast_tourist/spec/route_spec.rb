@@ -24,7 +24,7 @@ describe Graph::Route do
   end
 
   it "knows its duration" do
-    route.duration.should == "04:45"
+    route.formatted_duration.should == "04:45"
   end
 
   it "knows its price" do
