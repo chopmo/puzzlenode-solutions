@@ -4,6 +4,10 @@ require 'formatter'
 class Graph
   include Formatter
 
+  class Route < Struct.new(:flights)
+    
+  end
+
   class Node < Struct.new(:flight)
     include Formatter
     attr_accessor :connections
@@ -21,7 +25,13 @@ class Graph
     def to_s; format_node(self); end
 
     def route
-      (previous ? previous.route : []) + [self]
+      n = self
+      nodes = []
+      while n
+        nodes.unshift(n)
+        n = n.previous
+      end
+      Route.new(nodes.map(&:flight))
     end
 
   end

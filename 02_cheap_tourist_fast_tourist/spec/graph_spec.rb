@@ -23,9 +23,17 @@ END
     g.nodes.size.should > 0
   end
 
-  # it "finds all routes to a city" do
-  #   g.routes_to("Z").size.should == 4
-  # end
+  it "finds all routes to a city" do
+    g = Graph.build(flights)
+    routes = g.routes_to("Z")
+    # routes.each do |r|
+    #   puts r
+    #   puts "\n\n"
+    # end
+    routes.size.should == 4
+  end
+
+  
   
   # it "finds the cheapest trip" do
   #   g = Graph.build(flights)
