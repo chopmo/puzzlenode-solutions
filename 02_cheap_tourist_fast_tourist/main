@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby -W
+$LOAD_PATH.unshift("lib")
+
+require 'input_parser'
+require 'solver'
+
+# xxx should be a single line but what the hell
+test_cases = InputParser.parse(open(ARGV[0]).read)
+puts Solver.solve(test_cases)
