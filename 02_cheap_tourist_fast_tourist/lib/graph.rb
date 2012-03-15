@@ -1,3 +1,6 @@
+require 'time'
+require 'bigdecimal'
+
 require 'city'
 require 'formatter'
 
@@ -5,7 +8,23 @@ class Graph
   include Formatter
 
   class Route < Struct.new(:flights)
-    
+    def from_city; flights.first.from_city; end
+    def to_city; flights.last.to_city; end
+    def departs; flights.first.departs; end
+    def arrives; flights.last.arrives; end
+
+    def duration
+      secs = Time.parse(arrives) - Time.parse(departs)
+      minutes = secs / 60
+      hours = minutes / 60
+      minutes = minutes % 60
+
+      format("%02d:%02d", hours, minutes)
+    end
+
+    def price
+      flights.inject(BigDecimal.new("0.0")) { |s, f| s + BigDecimal.new(f.price) }
+    end
   end
 
   class Node < Struct.new(:flight)
@@ -27,7 +46,7 @@ class Graph
     def route
       n = self
       nodes = []
-      while n
+      while n && n.flight.from_city != "-"
         nodes.unshift(n)
         n = n.previous
       end

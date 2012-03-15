@@ -33,16 +33,14 @@ END
     routes.size.should == 4
   end
 
-  
-  
-  # it "finds the cheapest trip" do
-  #   g = Graph.build(flights)
-  #   puts g
-  #   trip = g.cheapest_trip
-  #   trip.departs.should == "09:00"
-  #   trip.arrives.should == "13:30"
-  #   trip.price.should == "200.00"
-  # end
+  it "finds the cheapest route" do
+    g = Graph.build(flights)
+
+    trip = g.cheapest_route
+    trip.departs.should == "09:00"
+    trip.arrives.should == "13:30"
+    trip.price.should == "200.00"
+  end
 
   # multiple trees, one per root node (source city)
   # OR (more elegant)
