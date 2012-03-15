@@ -7,6 +7,7 @@ require 'formatter'
 class Graph
   include Formatter
 
+  # XXX: break out
   class Route < Struct.new(:flights)
     def from_city; flights.first.from_city; end
     def to_city; flights.last.to_city; end
@@ -38,6 +39,7 @@ class Graph
     end
   end
 
+  # XXX: break out
   class Node < Struct.new(:flight)
     include Formatter
     attr_accessor :connections
@@ -54,6 +56,7 @@ class Graph
     
     def to_s; format_node(self); end
 
+    # XXX ugly
     def route
       n = self
       nodes = []
@@ -92,11 +95,10 @@ class Graph
 
 
   private
+  # XXX this is ugly
   def connect_flights(flights)
     queue = [@root]
-    # @nodes = flights.map { |f| Node.new(f) }
     @nodes = []
-    
     while !queue.empty? do
       node = queue.shift
       @nodes << node
@@ -107,9 +109,5 @@ class Graph
         queue << next_node
       end
     end
-    
-    # @nodes.each do |n|
-    #   n.connections = @nodes.select { |k| n.flight.to_city == k.flight.from_city && n.flight.arrives <= k.flight.departs }
-    # end
   end
 end
