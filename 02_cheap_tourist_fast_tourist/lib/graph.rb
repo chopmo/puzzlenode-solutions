@@ -86,6 +86,10 @@ class Graph
     routes_to("Z").sort_by(&:price).first
   end
 
+  def fastest_route
+    routes_to("Z").sort_by(&:duration).first
+  end
+
 
   private
   def connect_flights(flights)

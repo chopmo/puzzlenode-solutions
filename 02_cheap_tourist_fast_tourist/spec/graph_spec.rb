@@ -25,12 +25,7 @@ END
 
   it "finds all routes to a city" do
     g = Graph.build(flights)
-    routes = g.routes_to("Z")
-    # routes.each do |r|
-    #   puts r
-    #   puts "\n\n"
-    # end
-    routes.size.should == 4
+    g.routes_to("Z").size.should == 4
   end
 
   it "finds the cheapest route" do
@@ -42,12 +37,12 @@ END
     route.formatted_price.should == "225.0"
   end
 
-  # it "finds the fastest route" do
-  #   g = Graph.build(flights)
+  it "finds the fastest route" do
+    g = Graph.build(flights)
 
-  #   route = g.fastest_route
-  #   route.departs.should == "12:00"
-  #   route.arrives.should == "16:30"
-  #   route.formatted_price.should == "550.0"
-  # end
+    route = g.fastest_route
+    route.departs.should == "12:00"
+    route.arrives.should == "16:30"
+    route.formatted_price.should == "550.0"
+  end
 end
