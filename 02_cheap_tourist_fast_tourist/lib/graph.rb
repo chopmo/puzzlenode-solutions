@@ -7,12 +7,17 @@ class Graph
   class Node < Struct.new(:flight)
     include Formatter
     attr_accessor :connections
+    attr_accessor :previous
 
     def initialize(*args)
       super
       @connections = []
     end
 
+    def has_visited?(city)
+      [flight.from_city, flight.to_city].include?(city) || (previous && previous.has_visited?(city))
+    end
+    
     def to_s; format_node(self); end
   end
   
@@ -32,12 +37,17 @@ class Graph
   private
   def connect_flights(flights)
     queue = [@root]
-    @nodes = flights.map { |f| Node.new(f) }
+    # @nodes = flights.map { |f| Node.new(f) }
+    @nodes = []
+    
     while !queue.empty? do
       node = queue.shift
-      @nodes.select { |k| node.flight.to_city == k.flight.from_city && node.flight.arrives <= k.flight.departs }.each do |connection|
-        node.connections << connection
-        queue << connection
+      @nodes << node
+      flights.select { |f| node.flight.to_city == f.from_city && node.flight.arrives <= f.departs && !node.has_visited?(f.to_city) }.each do |flight|
+        next_node = Node.new(flight)
+        next_node.previous = node
+        node.connections << next_node
+        queue << next_node
       end
     end
     
