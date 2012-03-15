@@ -37,6 +37,32 @@ END
     route.formatted_price.should == "225.00"
   end
 
+  it "takes duration into account when finding cheapest route" do
+    input = <<END
+A B 05:00 09:00 50.00
+A B 08:00 09:00 50.00
+B Z 10:00 11:00 75.00
+END
+    
+    g = Graph.build(input.lines.map { |l| TestCaseParser.parse_flight(l) })
+
+    route = g.cheapest_route
+    route.departs.should == "08:00"
+  end
+
+  it "takes price into account when finding fastest route" do
+    input = <<END
+A B 08:00 09:00 100.00
+A B 08:00 09:00 50.00
+B Z 10:00 11:00 50.00
+END
+    
+    g = Graph.build(input.lines.map { |l| TestCaseParser.parse_flight(l) })
+
+    route = g.fastest_route
+    route.formatted_price.should == "100.00"
+  end
+
   it "finds the fastest route" do
     g = Graph.build(flights)
 

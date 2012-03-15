@@ -91,11 +91,11 @@ class Graph
   end
 
   def cheapest_route
-    routes_to("Z").sort_by(&:price).first
+    routes_to("Z").sort_by { |f| [f.price, f.duration] }.first
   end
 
   def fastest_route
-    routes_to("Z").sort_by(&:duration).first
+    routes_to("Z").sort_by { |f| [f.duration, f.price] }.first
   end
 
 
