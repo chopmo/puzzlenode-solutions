@@ -13,6 +13,9 @@ class Graph
     def departs; flights.first.departs; end
     def arrives; flights.last.arrives; end
 
+    def duration
+      Time.parse(arrives) - Time.parse(departs)
+    end
 
     def formatted_duration
       minutes = duration / 60
@@ -21,14 +24,15 @@ class Graph
       
       format("%02d:%02d", hours, minutes)
     end
-    
-    def duration
-      Time.parse(arrives) - Time.parse(departs)
-    end
 
     def price
       flights.inject(BigDecimal.new("0.0")) { |s, f| s + BigDecimal.new(f.price) }
     end
+
+    def formatted_price
+      price.to_f.to_s
+    end
+
   end
 
   class Node < Struct.new(:flight)
