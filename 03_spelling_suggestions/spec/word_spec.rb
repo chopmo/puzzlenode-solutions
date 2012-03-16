@@ -20,11 +20,13 @@ describe Word do
         lcss("foo", "").should == ""
       end
 
-      it "handles matching single-letter words" do
+      it "handles identical single-letter words" do
         lcss("x", "x").should == "x"
       end
-    end
 
-    
+      it "handles longer identical words" do
+        lcss("foo", "foo").should == "foo"
+      end
+    end
   end
 end
