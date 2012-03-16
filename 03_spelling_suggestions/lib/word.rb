@@ -16,8 +16,18 @@ class Word
     @data[@idx]
   end
 
-  def can_advance_to?(letter)
-    @data[@idx..-1].include?(letter)
+  def remaining
+    @data[@idx..-1]
+  end
+  
+  def distance_to(letter)
+    remaining.index(letter) || 999 # What to use in a case like this? 
+  end
+
+  def to_s
+    s = (" " + @data.split("").join(" ") + "   ")
+    s[@idx*2] = "["; s[@idx*2+2] = "]"
+    s
   end
 
 
@@ -33,14 +43,22 @@ class Word
         w1.advance
         w2.advance
       else
-        if !w2.can_advance_to?(w1.letter)
+        if w1.distance_to(w2.letter) < w2.distance_to(w1.letter)
           w1.advance
-        elsif !w1.can_advance_to?(w2.letter)
+        else
           w2.advance
         end
       end
+
+      # puts w1
+      # puts w2
+      # puts "RESULT: " + result
     end
     result
+  end
+
+  def self.fix_spelling(wrong, w1, w2)
+    lcss(wrong, w1).size > lcss(wrong, w2).size ? w1 : w2
   end
 
 end

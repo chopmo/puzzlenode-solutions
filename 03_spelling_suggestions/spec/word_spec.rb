@@ -6,7 +6,11 @@ describe Word do
     Word.lcss(s1, s2)
   end
 
-  describe "#lcss" do
+  def fix_spelling(wrong, w1, w2)
+    Word.fix_spelling(wrong, w1, w2)    
+  end
+
+  describe ".lcss" do
     it "handles empty words" do
       lcss("", "").should == ""
     end
@@ -41,6 +45,31 @@ describe Word do
 
     it "handles when w2 contains a letter not found in w1" do
       lcss("foobar", "fooXbar").should == "foobar"
+    end
+
+    it "handles when w1 contains a letter in w2 that must be skipped" do
+      lcss("abecde",
+           "abcde").should == "abcde"
+    end
+
+    it "handles when w2 contains a letter in w1 that must be skipped" do
+      lcss("abcde",
+           "abecde").should == "abcde"
+    end
+
+    it "handles more realistic cases" do
+      lcss("remimance", "remembrance").should == "remmance"
+      lcss("remimance", "reminiscence").should == "remince"
+    end
+  end
+
+  describe ".fix_spelling" do
+    it "chooses 'remembrance'" do
+      fix_spelling("remimance", "remembrance", "reminiscence").should == "remembrance"
+    end
+
+    it "chooses 'incidentally'" do
+      fix_spelling("inndietlly", "immediately", "incidentally").should == "incidentally"
     end
   end
 end
