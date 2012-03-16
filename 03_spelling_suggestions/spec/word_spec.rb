@@ -11,7 +11,20 @@ describe Word do
       it "handles empty words" do
         lcss("", "").should == ""
       end
+
+      it "handles when first word is empty" do
+        lcss("", "foo").should == ""
+      end
+      
+      it "handles when second word is empty" do
+        lcss("foo", "").should == ""
+      end
+
+      it "handles matching single-letter words" do
+        lcss("x", "x").should == "x"
+      end
     end
+
     
   end
 end
