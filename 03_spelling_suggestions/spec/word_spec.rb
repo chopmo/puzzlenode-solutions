@@ -34,5 +34,13 @@ describe Word do
     it "handles when w2 is a prefix of w1" do
       lcss("foobar", "foo").should == "foo"
     end
+
+    it "handles when w1 contains a letter not found in w2" do
+      lcss("fooXbar", "foobar").should == "foobar"
+    end
+
+    it "handles when w2 contains a letter not found in w1" do
+      lcss("foobar", "fooXbar").should == "foobar"
+    end
   end
 end

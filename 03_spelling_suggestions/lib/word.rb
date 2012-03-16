@@ -16,6 +16,10 @@ class Word
     @data[@idx]
   end
 
+  def can_advance_to?(letter)
+    @data[@idx..-1].include?(letter)
+  end
+
 
   def self.lcss(s1, s2)
     w1 = new(s1)
@@ -28,6 +32,12 @@ class Word
         result += w1.letter
         w1.advance
         w2.advance
+      else
+        if !w2.can_advance_to?(w1.letter)
+          w1.advance
+        elsif !w1.can_advance_to?(w2.letter)
+          w2.advance
+        end
       end
     end
     result
