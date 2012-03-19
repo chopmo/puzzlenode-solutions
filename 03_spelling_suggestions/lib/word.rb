@@ -1,61 +1,46 @@
 class Word
   def initialize(s)
-    @data = s
-    @idx = 0
+    @data = s.to_s
   end
 
-  def done?
-    @idx >= @data.size
+  def last
+    @data[-1]
   end
 
-  def advance
-    @idx += 1
+  def without_last
+    @data[0..-2]
   end
 
-  def letter
-    @data[@idx]
-  end
-
-  def remaining
-    @data[@idx..-1]
-  end
-  
-  def distance_to(letter)
-    remaining.index(letter) || 999 # What to use in a case like this? 
+  def empty?
+    @data.empty?
   end
 
   def to_s
-    s = (" " + @data.split("").join(" ") + "   ")
-    s[@idx*2] = "["; s[@idx*2+2] = "]"
-    s
+    @data
   end
-
 
   def self.lcss(s1, s2)
-    w1 = new(s1)
-    w2 = new(s2)
+    memoize_result_for([s1, s2]) do
+      w1 = new(s1)
+      w2 = new(s2)
 
-    result = ""
-
-    until w1.done? || w2.done?
-      if w1.letter == w2.letter
-        result += w1.letter
-        w1.advance
-        w2.advance
+      if w1.empty? || w2.empty?
+        ""
+      elsif w1.last == w2.last
+        lcss(w1.without_last, w2.without_last) + w1.last
       else
-        if w1.distance_to(w2.letter) < w2.distance_to(w1.letter)
-          w1.advance
-        else
-          w2.advance
-        end
+        res1 = lcss(w1.without_last, w2)
+        res2 = lcss(w1, w2.without_last)
+        res1.size >= res2.size ? res1 : res2
       end
-
-      # puts w1
-      # puts w2
-      # puts "RESULT: " + result
     end
-    result
   end
+
+  def self.memoize_result_for(key)
+    @memoized ||= {}
+    @memoized[key] ||= yield
+  end
+
 
   def self.fix_spelling(wrong, w1, w2)
     lcss(wrong, w1).size > lcss(wrong, w2).size ? w1 : w2
