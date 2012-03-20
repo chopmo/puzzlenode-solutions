@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby -W
+$LOAD_PATH.unshift("lib")
+require 'lasers'
+
+puts Lasers::solve(open(ARGV[0]).read)
