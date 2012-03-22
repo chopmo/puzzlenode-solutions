@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby -W
+def convert_little_endian(bytes)
+  result = 0
+  shift = 0
+  bytes.each do |b|
+    result += (b << shift)
+    shift += 8
+  end
+  result
+end
+
+bmp_bytes = open("data/input.bmp", "rb").bytes.to_a
+offset = convert_little_endian(bmp_bytes.slice(0x0a, 4))
+pixel_array_size = convert_little_endian(bmp_bytes.slice(0x22, 4))
+
+puts offset
+puts pixel_array_size
+
