@@ -9,10 +9,39 @@ def convert_little_endian(bytes)
   result
 end
 
-bmp_bytes = open("data/input.bmp", "rb").bytes.to_a
+
+def encode_to_bool_array(s)
+  result = []
+  s.chars.each do |c|
+    i = c.ord
+    (7.downto(0)).map { |p| 2 ** p }.each do |mask|
+      result << (i & mask > 0)
+    end
+  end
+  result
+end
+
+
+input_filename = ARGV[0]
+message_filename = ARGV[1]
+
+bmp_bytes = open(input_filename, "rb").bytes.to_a
 offset = convert_little_endian(bmp_bytes.slice(0x0a, 4))
 pixel_array_size = convert_little_endian(bmp_bytes.slice(0x22, 4))
 
-puts offset
-puts pixel_array_size
+message = open(message_filename).read
+encoded_message = encode_to_bool_array(message) # .map { |b| b ? "1" : "0" }.join
 
+pixel_array_size.times do |i|
+  val = (i >= encoded_message.size ? false : encoded_message[i])
+  pixel_idx = offset + i
+  if val
+    bmp_bytes[pixel_idx] = bmp_bytes[pixel_idx] | 1
+  else
+    bmp_bytes[pixel_idx] = bmp_bytes[pixel_idx] & 0xFE
+  end
+end
+
+open("./solution.bmp", "wb") do |f|
+  f.write bmp_bytes.map { |b| b.chr }.join
+end
