@@ -48,4 +48,9 @@ END
     @dictionary.words[1].should == "gimble"
   end
 
+  it "can reduce itself given a tileset" do
+    
+    @dictionary.reduce(tileset)
+  end
+
 end
