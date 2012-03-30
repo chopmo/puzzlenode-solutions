@@ -14,5 +14,14 @@ class Board
     @cells[r][c]
   end
 
+  def score(placement)
+    tiles = placement.tiles
+    cells = remaining_cells(placement)
+    tiles.zip(cells).map { |t, c| c * t.value }.inject(&:+)
+  end
+
+  def remaining_cells(p)
+    @cells[p.row][p.column..-1]
+  end
 
 end
