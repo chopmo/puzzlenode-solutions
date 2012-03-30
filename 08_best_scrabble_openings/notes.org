@@ -1,4 +1,4 @@
 Board: Given a Placement, return a score
 Placement (row, column, orientation, tiles)
 TileSet: Hasm from tile to count of that tile
-WordList: Given a tileset, reject unplacable words.
+Dictionary: Given a tileset, reject unplacable words.
