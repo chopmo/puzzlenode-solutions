@@ -21,7 +21,11 @@ class Board
   end
 
   def remaining_cells(p)
-    @cells[p.row][p.column..-1]
+    if p.orientation == :horizontal
+      @cells[p.row][p.column..-1]
+    else
+      @cells.transpose[p.column][p.row..-1]
+    end
   end
 
 end

@@ -44,5 +44,10 @@ END
       placement = Placement.new(1, 3, :horizontal, @tiles)
       @board.score(placement).should == 25
     end
+
+    specify "for a vertical placement" do
+      placement = Placement.new(1, 3, :vertical, @tiles)
+      @board.score(placement).should == 19
+    end
   end
 end
