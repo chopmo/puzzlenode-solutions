@@ -99,9 +99,9 @@ END
     p = Placement.new(0, 1, :vertical, [Tile.new("x1"), Tile.new("y1")])
 
     b.render(p).should ==<<-END.gsub(/^\s*/, '')
-      1x1
-      1y1
-      111
+      1 x 1
+      1 y 1
+      1 1 1
     END
 
   end

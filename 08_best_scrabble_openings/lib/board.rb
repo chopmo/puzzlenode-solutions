@@ -1,4 +1,5 @@
 require 'json'
+require 'placement'
 
 class Board
   def self.from_json(json)
@@ -75,7 +76,7 @@ class Board
       end
     end
 
-    canvas.map { |row| row.join }.join("\n") + "\n"
+    canvas.map { |row| row.join(" ") }.join("\n") + "\n"
   end
 
 end
