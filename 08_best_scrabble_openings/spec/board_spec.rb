@@ -41,6 +41,33 @@ END
     @board.cell(2, 2).should == 1
   end
 
+  it "finds the possible placements" do
+    # XXX I'm unsure if this belongs here. Maybe I don't really understand SRP :/
+    b = Board.from_ascii(<<-END)
+      1 1 1
+      1 1 1
+      1 1 1
+      END
+
+    tiles = [Tile.new("f1"), Tile.new("o1"), Tile.new("o1")]
+    placements = b.possible_placements(tiles)
+    placements.size.should == 6
+
+    placements.select { |p| p.orientation == :horizontal }.size.should == 3
+    placements.select { |p| p.orientation == :vertical }.size.should == 3
+
+    p = placements[0]
+    p.row.should == 0
+    p.column.should == 0
+
+    tiles = [Tile.new("f1"), Tile.new("o1")]
+    placements = b.possible_placements(tiles)
+    placements.size.should == 12
+    p = placements[2]
+    p.row.should == 0
+    p.column.should == 1
+    p.orientation.should == :horizontal
+  end
 
   context "it returns the score" do
     before do
@@ -61,4 +88,5 @@ END
       @board.score(placement).should == 19
     end
   end
+  
 end

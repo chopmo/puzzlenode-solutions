@@ -19,6 +19,14 @@ class Board
     @cells[r][c]
   end
 
+  def rows
+    @cells
+  end
+
+  def columns
+    @cells.transpose
+  end
+
   def score(placement)
     tiles = placement.tiles
     cells = remaining_cells(placement)
@@ -33,4 +41,24 @@ class Board
     end
   end
 
+  def size
+    @cells.size
+  end
+
+  def valid_placement?(p)
+    remaining_cells(p).size >= p.tiles.size
+  end
+
+  def possible_placements(tiles)
+    res = []
+    size.times do |row_idx|
+      size.times do |col_idx|
+        [:horizontal, :vertical].each do |orientation|
+          p = Placement.new(row_idx, col_idx, orientation, tiles)
+          res << p if valid_placement?(p)
+        end
+      end
+    end
+    res
+  end
 end
