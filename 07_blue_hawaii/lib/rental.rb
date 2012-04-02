@@ -49,7 +49,7 @@ class Rental
   end
 
   def find_season(d)
-    seasons.first
+    seasons.select { |s| s.covers?(d) }.first
   end
   
   def add_sales_tax(amount)
