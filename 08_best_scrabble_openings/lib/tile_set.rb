@@ -3,29 +3,30 @@ require 'tile'
 
 class TileSet
   def self.from_json(json)
-    new(json)
+    tiles = JSON.parse(json).map { |s| Tile.new(s) }
+    new(tiles)
   end
 
-  def initialize(json)
-    tile_strings = JSON.parse(json)
-    tiles = tile_strings.map { |s| Tile.new(s) }
-    @letter_counts = Hash.new(0)
-    tiles.each do |t|
-      @letter_counts[t.letter] += 1
+  def initialize(tiles)
+    @tiles = tiles
+    @letter_counts = count_letters(@tiles.map(&:letter))
+  end
+
+  def count_letters(letters)
+    # XXX there is an easier way
+    res = Hash.new(0)
+    letters.each do |l|
+      res[l] += 1
     end
+    res
   end
-
-  # def count_letters(letters)
-
-  # end
   
   def count(letter)
     @letter_counts[letter]
   end
 
   def can_form?(word)
-    # letters = count_letters(word.split(//))
-    false
+    count_letters(word.split(//)).all? { |k, v| @letter_counts[k] >= v }
   end
 
 end

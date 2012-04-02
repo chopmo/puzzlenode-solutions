@@ -38,7 +38,6 @@ END
   end
 
   it "knows if it can form a word" do
-    pending
     @tileset.can_form?("chopmo").should == false
     @tileset.can_form?("wig").should == true
     @tileset.can_form?("wiig").should == true
