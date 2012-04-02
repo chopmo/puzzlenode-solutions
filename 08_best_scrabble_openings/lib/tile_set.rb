@@ -29,8 +29,14 @@ class TileSet
     count_letters(word.split(//)).all? { |k, v| @letter_counts[k] >= v }
   end
 
+  def get_tiles(word)
+    word.split(//).map { |l| get(l) }
+  end
+
+  private
   def get(letter)
     @tiles.select { |t| t.letter == letter }.first
   end
+
 
 end
