@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby -W
+$LOAD_PATH.unshift("lib")
+require 'solver'
+
+input = open(ARGV[0]).read
+rentals = open(ARGV[1]).read
+
+puts Solver.solve(input, rentals)
