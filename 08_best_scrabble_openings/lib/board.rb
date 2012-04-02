@@ -76,7 +76,7 @@ class Board
       end
     end
 
-    canvas.map { |row| row.join(" ") }.join("\n") + "\n"
+    canvas.map { |row| row.join(" ") }.join("\n")
   end
 
 end
