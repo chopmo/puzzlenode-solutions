@@ -1,13 +1,11 @@
 require 'json'
 
-class Dictionary
+class Dictionary < Struct.new(:words)
   def self.from_json(json)
-    new(json)
+    dict = new(JSON.parse(json))
   end
 
-  def initialize(json)
-    @words = JSON.parse(json)
+  def reject_unplacable(tileset)
+    words.select! { |w| tileset.can_form?(w) }
   end
-
-  attr_reader :words
 end

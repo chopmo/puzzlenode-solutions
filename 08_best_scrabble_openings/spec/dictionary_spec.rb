@@ -1,7 +1,7 @@
 require 'dictionary'
+require 'tile_set'
 
 describe Dictionary do
-
   before do
     json =<<END
 [
@@ -49,8 +49,8 @@ END
   end
 
   it "can reduce itself given a tileset" do
-    
-    @dictionary.reduce(tileset)
+    tileset = TileSet.from_json('["m1", "o1", "m1", "e2"]')
+    @dictionary.reject_unplacable(tileset)
+    @dictionary.words.should == ["mome"]
   end
-
 end
