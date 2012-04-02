@@ -61,4 +61,21 @@ class Board
     end
     res
   end
+
+  def render(placement)
+    canvas = @cells.dup
+    row = placement.row
+    column = placement.column
+    placement.tiles.each do |t|
+      canvas[row][column] = t.letter
+      if placement.orientation == :horizontal
+        column += 1
+      else
+        row += 1
+      end
+    end
+
+    canvas.map { |row| row.join }.join("\n") + "\n"
+  end
+
 end

@@ -88,5 +88,21 @@ END
       @board.score(placement).should == 19
     end
   end
-  
+
+  it "renders a placement" do
+    b = Board.from_ascii(<<-END)
+      1 1 1
+      1 1 1
+      1 1 1
+    END
+
+    p = Placement.new(0, 1, :vertical, [Tile.new("x1"), Tile.new("y1")])
+
+    b.render(p).should ==<<-END.gsub(/^\s*/, '')
+      1x1
+      1y1
+      111
+    END
+
+  end
 end
