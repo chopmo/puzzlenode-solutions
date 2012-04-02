@@ -2,12 +2,17 @@ require 'json'
 
 class Board
   def self.from_json(json)
-    Board.new(json)
+    cells = JSON.parse(json).map { |row| row.split(" ").map(&:to_i) }
+    Board.new(cells)
   end
 
+  def self.from_ascii(ascii)
+    cells = ascii.gsub(/^$/, '').lines.map(&:strip).reject(&:empty?).map { |row| row.split(" ").map(&:to_i) }
+    Board.new(cells)
+  end
 
-  def initialize(json)
-    @cells = JSON.parse(json).map { |row| row.split(" ").map(&:to_i) }
+  def initialize(cells)
+    @cells = cells
   end
 
   def cell(r, c)

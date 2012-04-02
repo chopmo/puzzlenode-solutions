@@ -24,6 +24,17 @@ END
     @board.should_not be_nil
   end
 
+  it "creates a new instance from ascii" do
+    b = Board.from_ascii(<<-END)
+      1 1 1
+      1 2 1
+      1 3 1
+      END
+    b.cell(0, 0).should == 1
+    b.cell(1, 1).should == 2
+    b.cell(2, 1).should == 3
+  end
+
   it "splits the board into cells" do
     @board.cell(3, 0).should == 2
     @board.cell(2, 1).should == 2
