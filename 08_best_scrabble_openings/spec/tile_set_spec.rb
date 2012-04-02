@@ -43,4 +43,10 @@ END
     @tileset.can_form?("wiig").should == true
     @tileset.can_form?("wwwwwwwwwwwwwwig").should == false
   end
+
+  it "can return a tile by letter" do
+    t = @tileset.get("w")
+    t.letter.should == "w"
+    t.value.should == 5
+  end
 end
