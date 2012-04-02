@@ -36,4 +36,12 @@ END
   it "returns the occurence count for a letter" do
     @tileset.count("i").should == 2
   end
+
+  it "knows if it can form a word" do
+    pending
+    @tileset.can_form?("chopmo").should == false
+    @tileset.can_form?("wig").should == true
+    @tileset.can_form?("wiig").should == true
+    @tileset.can_form?("wwwwwwwwwwwwwwig").should == false
+  end
 end

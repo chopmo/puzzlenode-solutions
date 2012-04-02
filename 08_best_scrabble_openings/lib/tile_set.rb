@@ -9,14 +9,23 @@ class TileSet
   def initialize(json)
     tile_strings = JSON.parse(json)
     tiles = tile_strings.map { |s| Tile.new(s) }
-    @counts = Hash.new(0)
+    @letter_counts = Hash.new(0)
     tiles.each do |t|
-      @counts[t.letter] += 1
+      @letter_counts[t.letter] += 1
     end
   end
 
+  # def count_letters(letters)
+
+  # end
+  
   def count(letter)
-    @counts[letter]
+    @letter_counts[letter]
+  end
+
+  def can_form?(word)
+    # letters = count_letters(word.split(//))
+    false
   end
 
 end
