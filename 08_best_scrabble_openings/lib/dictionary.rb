@@ -2,7 +2,7 @@ require 'json'
 
 class Dictionary < Struct.new(:words)
   def self.from_json(json)
-    dict = new(JSON.parse(json))
+    new(JSON.parse(json))
   end
 
   def reject_unplacable(tileset)
